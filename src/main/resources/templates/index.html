@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>MotoCenter</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Welcome to MotoCenter!!</h1>
+    <img src="../static/images/MotoCenter.png" th:src="@{images/MotoCenter.png}"
+         alt="Safe page"
+         class="full-image"
+    />
+    <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" href="#" th:href="@{/user-panel}"> User panel </a>
+    &nbsp;&nbsp;
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" th:href="@{/admin}"> Administrator panel </a>
+</div>
+</body>
+</html>

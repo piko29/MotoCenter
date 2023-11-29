@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>MotoCenter - User panel</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+<div class="item-left">
+    <a href="#" th:href="@{/}">Go back to homepage</a>
+</div>
+<div class="item-right">
+    <a sec:authorize="isAuthenticated()"
+       th:text="|Log out ${#authentication.name}|"
+       href="#" th:href="@{/logout}">Log out</a>
+</div>
+<br>
+<h1 th:text="'Hello ' + ${#authentication.name}">Hello!</h1>
+<h2>Change password</h2>
+<form th:action="@{/change-password}" method="post">
+    <input type="password" name="newPassword" placeholder="New password">
+    <button type="submit">Change</button>
+<div class="container">
+    <br>
+    <h2>Users list</h2>
+    <ul>
+        <li th:each="email: ${userEmails}">
+            <span th:text="${email}">example@email.com</span>
+        </li>
+    </ul>
+</div>
+</form>
+</body>
+</html>

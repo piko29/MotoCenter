@@ -1,0 +1,44 @@
+.container {
+    margin: 0 auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+.item-left {
+    float: left;
+    margin: auto;
+}
+.item-right {
+    float: right;
+    margin: auto;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    align-items: center;
+}
+
+.lock-icon {
+    display: block;
+}
+
+.header,
+.lock-icon,
+.form-item {
+    text-align: center;
+}
+
+.form-item {
+    margin: 4px 4px;
+    width: 100%;
+}
+.resized-image {
+    max-width: 30%;
+    max-height: 30%;
+}
+.full-image {
+    max-width: 100%;
+}

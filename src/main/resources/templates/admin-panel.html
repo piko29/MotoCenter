@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>MotoCenter - Administrator panel</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+    <div class="item-left">
+        <a href="#" th:href="@{/}">Go back to homepage</a>
+    </div>
+    <div class="item-right">
+        <a sec:authorize="isAuthenticated()"
+           th:text="|Log out ${#authentication.name}|"
+           href="#" th:href="@{/logout}">Log out</a>
+    </div>
+    <br>
+<div class="container">
+    <h1 class="header" style="font-family:fantasy">Administrator panel</h1>
+    <h2>Users list</h2>
+    <ul>
+        <li th:each="email: ${userEmails}">
+            <span th:text="${email}">example@email.com</span>
+            <a href="#" th:href="@{/admin/delete-user(email=${email})}">Delete</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
