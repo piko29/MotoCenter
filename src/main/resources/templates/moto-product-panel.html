@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>MotoCenter - Administrator panel</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+<div class="item-left">
+    <a href="#" th:href="@{/}">Go back to homepage</a>
+</div>
+<div class="item-right">
+    <a sec:authorize="isAuthenticated()"
+       th:text="|Log out ${#authentication.name}|"
+       href="#" th:href="@{/logout}">Log out</a>
+</div>
+<br>
+<div class="container">
+    <h1 class="header" style="font-family:fantasy">Product panel</h1>
+    <h2>Product list</h2>
+    <ul>
+        <li class="element-frame" th:each="motoProduct: ${motoProducts}">
+
+            <img th:src="@{${'/images/'+motoProduct.image}}" width="300">
+            <br>
+            <span th:text="${motoProduct.title}">example_product</span>
+
+            <button class="small-button" type="submit">Private message</button>
+            <form th:action="@{'/products/{id}'(id=${motoProduct.id})}" th:method="get">
+                <button class="small-button" type="submit">Details</button>
+            </form>
+
+            <button class="small-button" type="submit" >Buy</button>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

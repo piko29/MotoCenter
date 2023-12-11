@@ -1,7 +1,19 @@
 .container {
     margin: 0 auto;
-    max-width: 400px;
+    max-width: 450px;
     text-align: center;
+}
+.products-container {
+    text-align: center;
+    align-items: center;
+    max-width: 600px;
+    display: flex;
+}
+
+.message-box {
+    display: flex;
+    box-sizing: border-box;
+    width: 70%;
 }
 
 .item-left {
@@ -30,7 +42,21 @@
 .form-item {
     text-align: center;
 }
-
+.small-button {
+    margin: 2px 2px;
+    width: 28%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.big-button {
+    margin: 2px 2px;
+    width: 45%;
+    font-size: large;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
 .form-item {
     margin: 4px 4px;
     width: 100%;
@@ -41,4 +67,11 @@
 }
 .full-image {
     max-width: 100%;
+}
+.element-frame {
+    border: 2px solid;
+    margin: 5px;
+    padding: 10px;
+    display: inline-block;
+    align-items: center;
 }

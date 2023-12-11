@@ -1,18 +1,17 @@
 package com.piko29.MotoCenter_v03.service;
 
+import com.piko29.MotoCenter_v03.model.dto.*;
 import com.piko29.MotoCenter_v03.repository.UserRepository;
 import com.piko29.MotoCenter_v03.repository.UserRoleRepository;
 import com.piko29.MotoCenter_v03.model.User;
-import com.piko29.MotoCenter_v03.model.dto.UserCredentialsDtoMapper;
 import com.piko29.MotoCenter_v03.model.UserRole;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.piko29.MotoCenter_v03.model.dto.UserCredentialsDto;
-import com.piko29.MotoCenter_v03.model.dto.UserRegistrationDto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -25,11 +24,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
+    //added 06.12 to check motoproduct by person id
+    private final MotoProductDtoMapper motoProductDtoMapper;
 
     public Optional<UserCredentialsDto> findCredentialsByEmail(String email) {
         return userRepository.findByEmail(email)
                 .map(UserCredentialsDtoMapper::map);
     }
+
 
     public List<String> findAllUserEmails() {
         return userRepository.findAllUsersByRoles_Name(USER_ROLE)
@@ -70,12 +72,12 @@ public class UserService {
                 .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
     }
 
-    public boolean isCurrentUserLogged(){
+    public boolean isCurrentUserLogged() {
         return SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getAuthorities().stream()
                 .anyMatch(authority -> (authority.getAuthority().equals("ROLE_USER"))
-                                    || authority.getAuthority().equals("ROLE_ADMIN"));
+                        || authority.getAuthority().equals("ROLE_ADMIN"));
     }
 
 
@@ -85,5 +87,40 @@ public class UserService {
         User currentUser = userRepository.findByEmail(currentUsername).orElseThrow();
         String newPasswordHash = passwordEncoder.encode(newPassword);
         currentUser.setPassword(newPasswordHash);
+    }
+
+
+    //added 06.12
+    public String getNameFromContextHolder() {
+
+        return SecurityContextHolder.getContext()
+                .getAuthentication().getName();
+
+    }
+    //later for message, check
+    public User getUserById(Long id) {
+        return new User();
+    }
+
+    //all user data, not necessary currently, might delete
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    //added 09.12
+    public List<MotoProductDto> getProductsByUsername(String username) {
+        System.out.println(userRepository.findByEmail(username)
+                .map(User::getMotoProductList)
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(motoProductDtoMapper::map)
+                .toList());
+        return userRepository.findByEmail(username)
+                .map(User::getMotoProductList)
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(motoProductDtoMapper::map)
+                .toList();
+
     }
 }

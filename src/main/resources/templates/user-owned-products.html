@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>MotoCenter - Owned products</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+<div class="item-left">
+    <a href="#" th:href="@{/user-panel}">Go back to user-panel</a>
+</div>
+<div class="item-right">
+    <a sec:authorize="isAuthenticated()"
+       th:text="|Log out ${#authentication.name}|"
+       href="#" th:href="@{/logout}">Log out</a>
+</div>
+    <div class="container">
+        <h2>Owned products</h2>
+        <ul>
+            <li class="element-frame" th:each="motoProduct: ${allOwnedMotoProducts}">
+                <img th:src="@{${'/images/'+motoProduct.image}}" width="300">
+                <br>
+                <span th:text="${'Title: ' + motoProduct.title}">example_title</span>
+                <br>
+                <span th:text="${'Description: ' + motoProduct.description}">example_description</span>
+                <br>
+                <span th:text="${'Price:' + motoProduct.price +' PLN'}">example_price</span>
+                <br>
+                <span th:text="${'Contact info: ' + motoProduct.contactInfo}">example_contact</span>
+                <br>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

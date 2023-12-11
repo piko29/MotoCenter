@@ -13,7 +13,7 @@ class HomeController {
     @GetMapping("/")
     String home() {
         if (userService.isCurrentUserLogged()) {
-            System.out.println(userService.isCurrentUserLogged());
+            System.out.println(userService.isCurrentUserLogged());//to debug
             return "index";
         } else {
             System.out.println(userService.isCurrentUserLogged());

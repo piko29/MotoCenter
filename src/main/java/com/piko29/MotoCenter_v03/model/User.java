@@ -1,6 +1,8 @@
 package com.piko29.MotoCenter_v03.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -26,7 +28,11 @@ public class User {
 	@JoinTable(
 			name = "user_roles",
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+			//added 06.12
 			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
 	)
 	private Set<UserRole> roles = new HashSet<>();
+	//added 06.12 to check motoproduct by userid, currently unused
+	@OneToMany(mappedBy = "user")
+	private List<MotoProduct> motoProductList = new ArrayList<>();
 }

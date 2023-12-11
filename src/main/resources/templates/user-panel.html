@@ -22,15 +22,19 @@
 <form th:action="@{/change-password}" method="post">
     <input type="password" name="newPassword" placeholder="New password">
     <button type="submit">Change</button>
+</form>
 <div class="container">
     <br>
+    <form th:action="@{user-panel/user-products}" th:method="get">
+        <button class="big-button" type="submit">Owned products</button>
+    </form>
+
     <h2>Users list</h2>
     <ul>
-        <li th:each="email: ${userEmails}">
+        <li class="element-frame" th:each="email: ${userEmails}">
             <span th:text="${email}">example@email.com</span>
         </li>
     </ul>
 </div>
-</form>
 </body>
 </html>

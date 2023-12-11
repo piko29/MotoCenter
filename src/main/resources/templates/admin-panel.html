@@ -19,7 +19,7 @@
     <h1 class="header" style="font-family:fantasy">Administrator panel</h1>
     <h2>Users list</h2>
     <ul>
-        <li th:each="email: ${userEmails}">
+        <li class="element-frame" th:each="email: ${userEmails}">
             <span th:text="${email}">example@email.com</span>
             <a href="#" th:href="@{/admin/delete-user(email=${email})}">Delete</a>
         </li>

@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS application_user;
 DROP TABLE IF EXISTS user_role;
+DROP TABLE IF EXISTS moto_product;
 
 CREATE TABLE application_user
 (
@@ -25,3 +26,14 @@ CREATE TABLE user_roles
     FOREIGN KEY (user_id) REFERENCES application_user(id),
     FOREIGN KEY (role_id) REFERENCES user_role(id)
 );
+
+CREATE TABLE moto_product
+(
+    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title           VARCHAR(100) NOT NULL,
+    description     VARCHAR(200) NOT NULL,
+    image       VARCHAR(200) NOT NULL,
+    price           INT NOT NULL,
+    contact_info    VARCHAR(200) NOT NULL,
+    user_id        BIGINT
+)

@@ -15,6 +15,8 @@
     <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" href="#" th:href="@{/user-panel}"> User panel </a>
     &nbsp;&nbsp;
     <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" th:href="@{/admin}"> Administrator panel </a>
+    <br>
+    <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" href="#" th:href="@{/products}"> MotoProducts </a>
 </div>
 </body>
 </html>

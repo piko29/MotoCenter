@@ -1,19 +1,33 @@
+<!--ALL TO FIX, NOT WORKING-->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Send message</title>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
 </head>
 <body>
+<div class="item-left">
+    <a href="#" th:href="@{/products}">Go back to products</a>
+</div>
+<div class="item-right">
+    <a sec:authorize="isAuthenticated()"
+       th:text="|Log out ${#authentication.name}|"
+       href="#" th:href="@{/logout}">Log out</a>
+</div>
+<br>
 <div class="container">
-    <img src="../static/images/MotoCenter.png" th:src="@{/images/MotoCenter.png}" alt="logo"
-         class="full-image">
     <h1 class="header" style="font-family:fantasy">Register</h1>
     <i class="fa-solid fa-lock fa-3x"></i>
-    <form class="form" th:action="@{/register}" method="post" th:object="${user}">
+
+
+
+
+    <form class="form" th:action="@{'/products/{id}/message'(id=${motoProduct.id})}" method="post" th:object="${message}">
+        <input th:field="*{content}" placeholder="Text of message" type="text">
+<!--        <form class="form" th:action="@{/register}" method="post" th:object="${user}">-->
         <input th:field="*{email}" placeholder="email address" type="email" class="form-item">
         <input th:field="*{password}" placeholder="password" type="password" class="form-item">
         <input th:field="*{firstName}" placeholder="name" class="form-item">

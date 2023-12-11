@@ -13,7 +13,6 @@ import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
-import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
 class SecurityConfiguration {
@@ -30,7 +29,9 @@ class SecurityConfiguration {
                 .requestMatchers(h2ConsoleRequestMatcher).permitAll()
                 .requestMatchers(mvc.pattern("/images/**"),mvc.pattern( "/styles/**")).permitAll()
                 .requestMatchers(mvc.pattern("/register"),mvc.pattern("/confirmation")).permitAll()
-                .requestMatchers(mvc.pattern("/user-panel"),mvc.pattern("/change-password")).hasAnyRole("USER", "ADMIN")
+                .requestMatchers(mvc.pattern("/user-panel"),mvc.pattern("/change-password")
+                ,mvc.pattern("/user-products")).hasAnyRole("USER", "ADMIN")
+//                .requestMatchers(mvc.pattern("/products")).hasAnyRole("USER", "ADMIN")//to check and update
                 .requestMatchers(mvc.pattern("/admin/**")).hasRole("ADMIN")
                 .anyRequest().authenticated()
         );

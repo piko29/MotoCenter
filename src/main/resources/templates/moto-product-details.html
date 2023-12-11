@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>MotoCenter - Details</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+<div class="item-left">
+    <a href="#" th:href="@{/products}">Go back to products</a>
+</div>
+<div class="item-right">
+    <a sec:authorize="isAuthenticated()"
+       th:text="|Log out ${#authentication.name}|"
+       href="#" th:href="@{/logout}">Log out</a>
+</div>
+<br>
+<div class="container">
+    <h1 class="header" style="font-family:fantasy">MotoProduct Details</h1>
+</div>
+<div class="products-container">
+    <ul>
+        <li class="element-frame" th:each="motoProduct: ${motoDetails}">
+            <img th:src="@{${'/images/'+motoProduct.image}}" width="800">
+            <br>
+            <span th:text="${'Title: ' + motoProduct.title}">example_title</span>
+            <br>
+            <span th:text="${'Description: ' + motoProduct.description}">example_description</span>
+            <br>
+            <span th:text="${'Price:' + motoProduct.price +' PLN'}">example_price</span>
+            <br>
+            <span th:text="${'Contact info: ' + motoProduct.contactInfo}">example_contact</span>
+            <br>
+            <span th:text="${'Owner id: ' + motoProduct.user.getId()}">example_id</span>
+            <br>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
