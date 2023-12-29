@@ -1,6 +1,8 @@
 package com.piko29.MotoCenter_v03.service;
 
+import com.piko29.MotoCenter_v03.model.MotoProduct;
 import com.piko29.MotoCenter_v03.model.dto.*;
+import com.piko29.MotoCenter_v03.repository.MotoProductRepository;
 import com.piko29.MotoCenter_v03.repository.UserRepository;
 import com.piko29.MotoCenter_v03.repository.UserRoleRepository;
 import com.piko29.MotoCenter_v03.model.User;
@@ -26,6 +28,9 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     //added 06.12 to check motoproduct by person id
     private final MotoProductDtoMapper motoProductDtoMapper;
+    //added 14.12
+    private final MotoProductRepository motoProductRepository;
+
 
     public Optional<UserCredentialsDto> findCredentialsByEmail(String email) {
         return userRepository.findByEmail(email)
@@ -103,7 +108,7 @@ public class UserService {
     }
 
     //all user data, not necessary currently, might delete
-    public Optional<User> findById(Long id) {
+    public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
     }
 
@@ -123,4 +128,53 @@ public class UserService {
                 .toList();
 
     }
+    //added 14.12
+
+    //firstly show details
+    public List<MotoProduct> getMotoProductById(Long id){
+        return motoProductRepository.findById(id).stream().toList();
+    }
+    //delete product 14.12
+    //make sure if it should be @Transactional
+    @Transactional
+    public void deleteMotoProduct(Long id){
+        motoProductRepository.deleteById(id);
+    }
+    //29.12 for controller
+    @Transactional
+    public MotoProduct findMotoProduct(Long id){
+        return motoProductRepository.findById(id).orElseThrow();
+    }
+    //29.12 for controller ending
+
+    //add motoproduct 20.12
+@Transactional
+    public void saveMotoProduct(MotoProductDto dto) {
+        MotoProduct motoProduct = new MotoProduct();
+        motoProduct.setTitle(dto.getTitle());
+        motoProduct.setDescription(dto.getDescription());
+        //eventually implement adding pictures to database
+        motoProduct.setImage("example.jpg");
+        motoProduct.setPrice(dto.getPrice());
+        motoProduct.setContactInfo(dto.getContactInfo());
+        User user = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();//important line
+        motoProduct.setUser(user);
+//        motoProduct.getUser().setId(motoProduct.getUser().getId()); //not needed
+        motoProduct.setOwner(getNameFromContextHolder());
+
+        motoProductRepository.save(motoProduct);
+    }
+
+    //edit motoproduct 23.12
+@Transactional
+    public void editMotoProduct(MotoProductDto dto, Long id){
+        MotoProduct motoProduct = motoProductRepository.findById(id).orElseThrow();
+        motoProduct.setTitle(dto.getTitle());
+        motoProduct.setDescription(dto.getDescription());
+        motoProduct.setPrice(dto.getPrice());
+        motoProduct.setContactInfo(dto.getContactInfo());
+
+        motoProductRepository.save(motoProduct);
+}
+
 }

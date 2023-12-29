@@ -19,17 +19,22 @@
     <div class="container">
         <h2>Owned products</h2>
         <ul>
-            <li class="element-frame" th:each="motoProduct: ${allOwnedMotoProducts}">
-                <img th:src="@{${'/images/'+motoProduct.image}}" width="300">
+            <li class="element-frame" th:each="allOwnedMotoProducts: ${allOwnedMotoProducts}">
+                <img th:src="@{${'/images/'+allOwnedMotoProducts.getImage()}}" width="300">
                 <br>
-                <span th:text="${'Title: ' + motoProduct.title}">example_title</span>
+                <span th:text="${'Title: ' + allOwnedMotoProducts.getTitle()}">example_title</span>
                 <br>
-                <span th:text="${'Description: ' + motoProduct.description}">example_description</span>
+                <span th:text="${'Price:' + allOwnedMotoProducts.getPrice() +' PLN'}">example_price</span>
                 <br>
-                <span th:text="${'Price:' + motoProduct.price +' PLN'}">example_price</span>
+                <span th:text="${'Contact info: ' + allOwnedMotoProducts.getContactInfo()}">example_contact</span>
                 <br>
-                <span th:text="${'Contact info: ' + motoProduct.contactInfo}">example_contact</span>
-                <br>
+                <form th:action="@{'user-products/{id}'(id=${allOwnedMotoProducts.getId()})}" th:method="get">
+                    <button class="small-button" type="submit">Details and edition</button>
+                </form>
+<!--button to delete motoproduct directly from list-->
+<!--                <form th:action="@{'user-products/delete/{id}'(id=${allOwnedMotoProducts.getId()})}" th:method=get>-->
+<!--                    <button class="small-button" type="submit">Delete</button>-->
+<!--                </form>-->
             </li>
         </ul>
     </div>

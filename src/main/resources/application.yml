@@ -3,4 +3,5 @@ spring:
     url: jdbc:h2:mem:test
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
+#      none było 21.12 i był błąd sekwencji moto product

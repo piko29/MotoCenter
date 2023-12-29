@@ -21,8 +21,11 @@ public class MotoProductDtoMapper {
         dto.setImage(motoProduct.getImage());
         dto.setPrice(motoProduct.getPrice());
         dto.setContactInfo(motoProduct.getContactInfo());
-        //adding userid to motoproduct
+//        //adding userid to motoproduct 06.12 different idea
         dto.setUserId(motoProduct.getUser().getId());
+
+//        //20.12 adding emais as username to motoproduct
+//        dto.setOwner(motoProduct.getUser().getEmail());
         return dto;
     }
     public MotoProduct map(MotoProductDto dto){
@@ -33,9 +36,13 @@ public class MotoProductDtoMapper {
         motoProduct.setImage(dto.getImage());
         motoProduct.setPrice(dto.getPrice());
         motoProduct.setContactInfo(dto.getContactInfo());
-        //adding user id to motoproduct
+//        //adding user id to motoproduct 06.12 different idea
         User user = userRepository.findById(dto.getUserId()).orElseThrow();
         motoProduct.setUser(user);
+
+        //20.12 adding emais as username to motoproduct
+//        User user = userRepository.findByEmail(dto.getOwner()).orElseThrow();
+//        motoProduct.setUser(user);
         return motoProduct;
     }
 }

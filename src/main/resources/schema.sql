@@ -32,8 +32,9 @@ CREATE TABLE moto_product
     id              BIGINT AUTO_INCREMENT PRIMARY KEY,
     title           VARCHAR(100) NOT NULL,
     description     VARCHAR(200) NOT NULL,
-    image       VARCHAR(200) NOT NULL,
+    image           VARCHAR(200) NOT NULL,
     price           INT NOT NULL,
     contact_info    VARCHAR(200) NOT NULL,
-    user_id        BIGINT
-)
+    user_id         BIGINT,
+    owner           VARCHAR(200) NOT NULL
+);

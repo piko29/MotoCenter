@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add MotoProduct</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+<div class="container">
+    <img src="../static/images/MotoCenter.png" th:src="@{/images/MotoCenter.png}" alt="logo"
+         class="resized-image">
+    <h1 class="header" style="font-family:fantasy">Add MotoProduct</h1>
+    <form class="form" th:action="@{/user-panel/add}" method="post" th:object="${motoProduct}">
+        <input th:field="*{title}" placeholder="title" class="form-item">
+        <input th:field="*{description}" placeholder="description" class="form-item">
+        <input th:field="*{contactInfo}" placeholder="contact info" class="form-item">
+        <input th:field="*{price}" placeholder="price" class="form-item">
+        <button type="submit" class="form-item">Add MotoProduct</button>
+    </form>
+
+</div>
+</body>
+</html>

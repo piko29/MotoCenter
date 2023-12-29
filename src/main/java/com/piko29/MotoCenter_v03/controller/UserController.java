@@ -1,15 +1,15 @@
 package com.piko29.MotoCenter_v03.controller;
 
+import com.piko29.MotoCenter_v03.model.MotoProduct;
 import com.piko29.MotoCenter_v03.model.User;
 import com.piko29.MotoCenter_v03.model.dto.MotoProductDto;
+import com.piko29.MotoCenter_v03.model.dto.UserRegistrationDto;
 import com.piko29.MotoCenter_v03.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +35,53 @@ public class UserController {
     List<MotoProductDto> allOwnedMotoProducts = userService.getProductsByUsername(userService.getNameFromContextHolder());
     model.addAttribute("allOwnedMotoProducts", allOwnedMotoProducts);
     return "user-owned-products";
+    }
+
+
+    //details 14.12
+    @GetMapping("/user-products/{id}")//reading
+    String motoProductDetails(@PathVariable Long id, Model model){
+        List<MotoProduct> allDetails = userService.getMotoProductById(id);
+        model.addAttribute("motoDetails", allDetails);
+        return "owned-moto-product-details";
+    }
+    //delete MotoProduct 14.12
+    @GetMapping("/user-products/{id}/delete")
+    String deleteMotoProduct(@PathVariable Long id){
+            userService.deleteMotoProduct(id);
+            return "redirect:/user-panel/user-products";
+    }
+
+    //adding MotoProduct 20.12
+    @GetMapping("/add")
+    String addMotoProductForm(Model model){
+        MotoProductDto motoProduct = new MotoProductDto();
+        model.addAttribute("motoProduct", motoProduct);
+        System.out.println("reading add form ");
+        return "add-moto-product-form";
+    }
+
+    @PostMapping("/add")
+    String addMotoProduct(MotoProductDto motoProductDto){
+        userService.saveMotoProduct(motoProductDto);
+        System.out.println("adding done - controller");
+        return "redirect:/user-panel";
+    }
+
+    //edit motoproduct 23.12
+    @GetMapping("/user-products/{id}/edit")
+    String editMotoProductForm(Model model,@PathVariable Long id){
+        MotoProduct motoProduct = userService.findMotoProduct(id);
+
+        model.addAttribute("motoProduct", motoProduct);
+        System.out.println("edit should be started from controller");
+        return "edit-moto-product-form";
+    }
+    @PostMapping("/user-products/{id}/edit")
+    String editMotoProduct(MotoProductDto motoProductDto, @PathVariable Long id){
+        userService.editMotoProduct(motoProductDto,id);
+        System.out.println("edit should be done from controller");
+        return "redirect:/user-panel/user-products";
     }
 
 }

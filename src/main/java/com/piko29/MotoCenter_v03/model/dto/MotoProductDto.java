@@ -14,4 +14,7 @@ public class MotoProductDto {
     private int price;
     private String contactInfo;
     private Long userId;//zmienione na user 06.12 sprawdz
+    //20.12 username of owner
+    private String owner;
+
 }
