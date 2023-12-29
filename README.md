@@ -21,4 +21,7 @@ login: andrew@email.com password: super.
 ![moto-product-details](https://github.com/piko29/MotoCenter/assets/124073777/557c8c7f-d7c4-479f-8db4-39eb483d806f)  ![index](https://github.com/piko29/MotoCenter/assets/124073777/f7e82236-913f-4832-a7af-464d03c07b1b)
 ![administrator-panel](https://github.com/piko29/MotoCenter/assets/124073777/30e656d6-24bc-4f6b-aa9d-cdf8d9521722)    ![user-panel](https://github.com/piko29/MotoCenter/assets/124073777/d9da8b49-dd98-402e-a221-0cfd520d84f5) 
  
+### Third stage completed: From user-panel - adding MotoProduct, editing MotoProduct, deleting MotoProduct.
 
+![edit-motoproduct-1-3-commit](https://github.com/piko29/MotoCenter/assets/124073777/4c5d4aaf-ecde-4357-92aa-3c17a9d0fca4)![deleting-motoproduct-3-commit](https://github.com/piko29/MotoCenter/assets/124073777/7ac8fa82-8b50-4f8d-97cf-de518e0ddac1)
+![addig-motoproduct-3-commit](https://github.com/piko29/MotoCenter/assets/124073777/4277c2a4-3cf3-4a27-ab72-414264b7ce1f)![edit-motoproduct-2-3-commit](https://github.com/piko29/MotoCenter/assets/124073777/e505b50a-4aca-46b9-8d53-4c3758dcdb4d)
