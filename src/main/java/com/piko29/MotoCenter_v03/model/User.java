@@ -32,7 +32,7 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
 	)
 	private Set<UserRole> roles = new HashSet<>();
-	//added 06.12 to check motoproduct by userid, currently unused
+	//added 06.12 to check motoproduct by userid, currently unused, to check!
 	@OneToMany(mappedBy = "user")
 	private List<MotoProduct> motoProductList = new ArrayList<>();
 }

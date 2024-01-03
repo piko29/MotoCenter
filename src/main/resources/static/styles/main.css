@@ -11,9 +11,15 @@
 }
 
 .message-box {
-    display: flex;
+    width: 80%;
+    height: 80%;
+    align-items: center;
+    padding: 22px 20px;
     box-sizing: border-box;
-    width: 70%;
+    border: 2px solid;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
 }
 
 .item-left {
@@ -32,6 +38,7 @@
     margin-top: 16px;
     align-items: center;
 }
+
 
 .lock-icon {
     display: block;

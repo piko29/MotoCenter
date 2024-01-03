@@ -9,11 +9,15 @@ import lombok.Setter;
 @Setter
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long messageId;
+    private Long productId;
+    private String title;
     private String content;
-    @OneToOne //make sure if it is the best relation
+    @ManyToOne //make sure if onetoone it is the best relation
+//    @JoinColumn(name = "user_id")
     private User sender;
-    @OneToOne //the same
+    @ManyToOne //the same
     private User recipient;
+
 }

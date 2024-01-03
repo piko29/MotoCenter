@@ -72,7 +72,6 @@ public class UserController {
     @GetMapping("/user-products/{id}/edit")
     String editMotoProductForm(Model model,@PathVariable Long id){
         MotoProduct motoProduct = userService.findMotoProduct(id);
-
         model.addAttribute("motoProduct", motoProduct);
         System.out.println("edit should be started from controller");
         return "edit-moto-product-form";

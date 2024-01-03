@@ -30,7 +30,8 @@ class SecurityConfiguration {
                 .requestMatchers(mvc.pattern("/images/**"),mvc.pattern( "/styles/**")).permitAll()
                 .requestMatchers(mvc.pattern("/register"),mvc.pattern("/confirmation")).permitAll()
                 .requestMatchers(mvc.pattern("/user-panel"),mvc.pattern("/change-password")
-                ,mvc.pattern("/user-products"),mvc.pattern("/user-products/add")).hasAnyRole("USER", "ADMIN")
+                ,mvc.pattern("/user-products"),mvc.pattern("/user-products/add")
+                ,mvc.pattern("/products/**")).hasAnyRole("USER", "ADMIN")
 //                .requestMatchers(mvc.pattern("/products")).hasAnyRole("USER", "ADMIN")//to check and update
                 .requestMatchers(mvc.pattern("/admin/**")).hasRole("ADMIN")
                 .anyRequest().authenticated()

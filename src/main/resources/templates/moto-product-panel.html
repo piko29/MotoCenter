@@ -25,7 +25,9 @@
             <br>
             <span th:text="${motoProduct.title}">example_product</span>
 
-            <button class="small-button" type="submit">Private message</button>
+            <form th:action="@{'/products/{id}/message'(id=${motoProduct.id})}" th:method="get">
+                <button class="small-button" type="submit">Private message</button>
+            </form>
             <form th:action="@{'/products/{id}'(id=${motoProduct.id})}" th:method="get">
                 <button class="small-button" type="submit">Details</button>
             </form>
