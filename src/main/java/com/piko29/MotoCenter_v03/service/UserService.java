@@ -1,7 +1,9 @@
 package com.piko29.MotoCenter_v03.service;
 
+import com.piko29.MotoCenter_v03.model.Message;
 import com.piko29.MotoCenter_v03.model.MotoProduct;
 import com.piko29.MotoCenter_v03.model.dto.*;
+import com.piko29.MotoCenter_v03.repository.MessageRepository;
 import com.piko29.MotoCenter_v03.repository.MotoProductRepository;
 import com.piko29.MotoCenter_v03.repository.UserRepository;
 import com.piko29.MotoCenter_v03.repository.UserRoleRepository;
@@ -13,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Member;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -30,6 +33,9 @@ public class UserService {
     private final MotoProductDtoMapper motoProductDtoMapper;
     //added 14.12
     private final MotoProductRepository motoProductRepository;
+    //added 04.01
+    private final MessageRepository messageRepository;//to check
+    private final MessageDtoMapper messageDtoMapper;
 
 
     public Optional<UserCredentialsDto> findCredentialsByEmail(String email) {
@@ -114,12 +120,6 @@ public class UserService {
 
     //added 09.12
     public List<MotoProductDto> getProductsByUsername(String username) {
-        System.out.println(userRepository.findByEmail(username)
-                .map(User::getMotoProductList)
-                .orElse(Collections.emptyList())
-                .stream()
-                .map(motoProductDtoMapper::map)
-                .toList());
         return userRepository.findByEmail(username)
                 .map(User::getMotoProductList)
                 .orElse(Collections.emptyList())
@@ -176,6 +176,44 @@ public class UserService {
 
         motoProductRepository.save(motoProduct);
 }
+    //reading message about motoproduct 04.01
+    public List<MessageDto> getMessagesByUsername(String username) {
+        return userRepository.findByEmail(username)
+                .map(User::getMessageList)
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(messageDtoMapper::map)
+                .toList();
+
+    }
+    //deleting message 05.01
+    @Transactional
+    public void deleteMessage(Long id){
+        messageRepository.deleteById(id);
+    }
+
+    //answer message 05.01
+    @Transactional
+    public void answerMotoProductMessage(Message messageDto,Long id){
+        Message message = new Message();
+        User sender = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();//important line
+        MotoProduct motoProduct = motoProductRepository.findById(id).orElseThrow();
+        System.out.println(sender);//debug
+        message.setSender(sender);
+        System.out.println("Product id:"+ id);//debug
+        message.setProductId(id);
+        System.out.println(motoProduct.getTitle());
+        message.setTitle(motoProduct.getTitle());
+        System.out.println("recipient: " + motoProduct.getUser());
+        //setrecipient was before 04.01
+        message.setUser(motoProduct.getUser());
+        //
+        message.setContent(messageDto.getContent());
+        System.out.println("motomessage: " + messageDto.getContent());
+
+        messageRepository.save(message);
+
+    }
 
 
 

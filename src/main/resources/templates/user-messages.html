@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>MotoCenter - Messages</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+<div class="item-left">
+    <a href="#" th:href="@{/user-panel}">Go back to user-panel</a>
+</div>
+<div class="item-right">
+    <a sec:authorize="isAuthenticated()"
+       th:text="|Log out ${#authentication.name}|"
+       href="#" th:href="@{/logout}">Log out</a>
+</div>
+<div class="container">
+    <h2>Private messages</h2>
+    <ul>
+        <li class="element-frame" th:each="message: ${allUserMessages}">
+            <span th:text="${'Message Id: ' + message.getMessageId()}">example_id</span>
+            <br>
+            <span th:text="${'Title: ' + message.getTitle()}">example_title</span>
+            <br>
+            <span th:text="${'Content:' + message.getContent()}">example_content</span>
+            <br>
+            <span th:text="${'Sender: ' + message.getSender()}">example_sender</span>
+            <br>
+            <form th:action="@{'user-messages/{id}/delete'(id=${message.getMessageId()})}" th:method="get">
+                <button class="small-button" type="submit">Delete</button>
+            </form>
+<!--            <form th:action="@{'user-products/{id}'(id=${allOwnedMotoProducts.getId()})}" th:method="get">-->
+<!--                <button class="small-button" type="submit">Details and edition</button>-->
+<!--            </form>-->
+            <!--button to delete motoproduct directly from list-->
+            <!--                <form th:action="@{'user-products/delete/{id}'(id=${allOwnedMotoProducts.getId()})}" th:method=get>-->
+            <!--                    <button class="small-button" type="submit">Delete</button>-->
+            <!--                </form>-->
+        </li>
+    </ul>
+</div>
+</body>
+</html>

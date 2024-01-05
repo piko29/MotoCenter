@@ -2,12 +2,8 @@ package com.piko29.MotoCenter_v03.controller;
 
 import com.piko29.MotoCenter_v03.model.Message;
 import com.piko29.MotoCenter_v03.model.MotoProduct;
-import com.piko29.MotoCenter_v03.model.dto.MotoProductDto;
-import com.piko29.MotoCenter_v03.model.dto.UserRegistrationDto;
-import com.piko29.MotoCenter_v03.service.MessageService;
 import com.piko29.MotoCenter_v03.service.MotoProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +18,7 @@ import java.util.List;
 @RequestMapping("/products")
 public class MotoProductController {
     private final MotoProductService motoProductService;
-    //added 06.12 not working yet
-    private final MessageService messageService;
+
 
     @GetMapping
     String productPanel(Model model){
@@ -34,7 +29,6 @@ public class MotoProductController {
 
     @GetMapping("/{id}")//maybe change this to findMotoProduct method
     String motoProductDetails(@PathVariable Long id, Model model){
-//        MotoProduct motoProduct = motoProductService.findMotoProduct(id);
         List<MotoProduct> allDetails = motoProductService.getMotoProductById(id);
         model.addAttribute("motoDetails", allDetails);
         return "moto-product-details";
@@ -44,7 +38,6 @@ public class MotoProductController {
     String motoProductMessageForm(@PathVariable Long id, Message messageDto, Model model){
         MotoProduct motoProduct = motoProductService.findMotoProduct(id);
         model.addAttribute("motoProduct", motoProduct);
-//        motoProductService.sendMotoProductMessage(messageDto,id);
         model.addAttribute("messageDto", messageDto);
         System.out.println("reading message form");
         return "moto-message-form";

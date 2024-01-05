@@ -2,6 +2,7 @@ package com.piko29.MotoCenter_v03.controller;
 
 import com.piko29.MotoCenter_v03.model.MotoProduct;
 import com.piko29.MotoCenter_v03.model.User;
+import com.piko29.MotoCenter_v03.model.dto.MessageDto;
 import com.piko29.MotoCenter_v03.model.dto.MotoProductDto;
 import com.piko29.MotoCenter_v03.model.dto.UserRegistrationDto;
 import com.piko29.MotoCenter_v03.service.UserService;
@@ -39,7 +40,7 @@ public class UserController {
 
 
     //details 14.12
-    @GetMapping("/user-products/{id}")//reading
+    @GetMapping("/user-products/{id}")
     String motoProductDetails(@PathVariable Long id, Model model){
         List<MotoProduct> allDetails = userService.getMotoProductById(id);
         model.addAttribute("motoDetails", allDetails);
@@ -73,14 +74,29 @@ public class UserController {
     String editMotoProductForm(Model model,@PathVariable Long id){
         MotoProduct motoProduct = userService.findMotoProduct(id);
         model.addAttribute("motoProduct", motoProduct);
-        System.out.println("edit should be started from controller");
         return "edit-moto-product-form";
     }
     @PostMapping("/user-products/{id}/edit")
     String editMotoProduct(MotoProductDto motoProductDto, @PathVariable Long id){
         userService.editMotoProduct(motoProductDto,id);
-        System.out.println("edit should be done from controller");
         return "redirect:/user-panel/user-products";
     }
+
+    //04.01
+    @GetMapping("/user-messages")
+    String userPanelMessages(Model model) {
+        List<MessageDto> allUserMessages = userService.getMessagesByUsername(userService.getNameFromContextHolder());
+        model.addAttribute("allUserMessages", allUserMessages);
+        return "user-messages";
+    }
+
+    //05.01
+    @GetMapping("/user-messages/{id}/delete")
+    String deleteMessage(@PathVariable Long id){
+        userService.deleteMessage(id);
+        return "redirect:/user-panel/user-messages";
+    }
+
+
 
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 public class MotoProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //was Generation.Auto, which cause primary key error!!!
+    //was Generation.Auto, which caused primary key error!!!
     private Long id;
     private String title;
     private String description;

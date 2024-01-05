@@ -70,7 +70,9 @@ public class MotoProductService {
         System.out.println(motoProduct.getTitle());
         message.setTitle(motoProduct.getTitle());
         System.out.println("recipient: " + motoProduct.getUser());
-        message.setRecipient(motoProduct.getUser());
+        //setrecipient was before 04.01
+        message.setUser(motoProduct.getUser());
+        //
         message.setContent(messageDto.getContent());
         System.out.println("motomessage: " + messageDto.getContent());
 

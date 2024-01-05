@@ -14,10 +14,11 @@ public class Message {
     private Long productId;
     private String title;
     private String content;
-    @ManyToOne //make sure if onetoone it is the best relation
-//    @JoinColumn(name = "user_id")
+    @ManyToOne
     private User sender;
-    @ManyToOne //the same
-    private User recipient;
+    //05.01 making recipient user to show list of messages
+    @ManyToOne //recipient
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

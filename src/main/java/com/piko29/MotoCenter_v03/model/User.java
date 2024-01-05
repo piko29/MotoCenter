@@ -35,4 +35,8 @@ public class User {
 	//added 06.12 to check motoproduct by userid, currently unused, to check!
 	@OneToMany(mappedBy = "user")
 	private List<MotoProduct> motoProductList = new ArrayList<>();
+
+	//04.01 reading messages
+	@OneToMany(mappedBy = "user")
+	private List<Message> messageList = new ArrayList<>();
 }
