@@ -20,6 +20,8 @@ public class MessageDtoMapper {
         dto.setSender(message.getSender().getEmail());
         //05.01 to show list of messages
         dto.setRecipient(message.getUser().getEmail());
+        //06.01 adding product id
+        dto.setProductId(message.getProductId());
         return dto;
     }
     public Message map(MessageDto dto){
@@ -33,6 +35,8 @@ public class MessageDtoMapper {
         User recipient = userRepository.findByEmail(dto.getRecipient()).orElseThrow();
         //05.01 to show list of messages
         message.setUser(recipient);
+        //06.01 adding product id
+        message.setProductId(dto.getProductId());
 
         return message;
     }

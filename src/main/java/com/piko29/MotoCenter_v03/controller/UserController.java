@@ -1,5 +1,6 @@
 package com.piko29.MotoCenter_v03.controller;
 
+import com.piko29.MotoCenter_v03.model.Message;
 import com.piko29.MotoCenter_v03.model.MotoProduct;
 import com.piko29.MotoCenter_v03.model.User;
 import com.piko29.MotoCenter_v03.model.dto.MessageDto;
@@ -94,6 +95,28 @@ public class UserController {
     @GetMapping("/user-messages/{id}/delete")
     String deleteMessage(@PathVariable Long id){
         userService.deleteMessage(id);
+        return "redirect:/user-panel/user-messages";
+    }
+    //08.01
+    @GetMapping("/user-messages/{id}/answer")
+    String motoProductMessageForm(@PathVariable Long id,  Model model, Message message){
+//a        MotoProduct motoProduct = userService.findMotoProduct(id);
+//a        model.addAttribute("motoProduct", motoProduct);
+
+//        MotoProduct motoProduct = motoProductService.findMotoProduct(id);
+//        model.addAttribute("motoProduct", motoProduct);
+        Message messageDto = userService.findMessage(id);
+        model.addAttribute("messageDto", messageDto);
+        model.addAttribute("message", message);//reading from existing message
+
+        System.out.println("reading answer message form");
+        return "answer-message-form";
+    }
+    @PostMapping("/user-messages/{id}/answer")
+    String motoProductMessage(@PathVariable Long id,Message dto){
+        userService.answerMotoProductMessage(dto, id);
+        //motoProductService.sendMotoProductMessage(messageDto,id);
+        System.out.println("sending answer message working fine");
         return "redirect:/user-panel/user-messages";
     }
 

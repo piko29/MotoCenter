@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Answer</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+<div class="item-left">
+    <a href="#" th:href="@{/user-panel/user-messages}">Go back to messages</a>
+</div>
+<div class="item-right">
+    <a sec:authorize="isAuthenticated()"
+       th:text="|Log out ${#authentication.name}|"
+       href="#" th:href="@{/logout}">Log out</a>
+</div>
+<br>
+<div class="container">
+    <h1 class="header" style="font-family:fantasy">Answer on message</h1>
+    <i class="fa-regular fa-envelope fa-4x"></i>
+</div>
+
+<div th:text="${'Title: ' + messageDto.getTitle()}">Title: </div>
+<div th:text="${'Recipient: ' + messageDto.getSender().getEmail()}">Recipient: </div>
+<br>
+
+
+<form class="form-item" th:action="@{'/user-panel/user-messages/{id}/answer'(id=${messageDto.getMessageId()})}" method="post" th:object="${message}">
+    <textarea class="message-box" rows="6" th:field="*{content}" placeholder="Text of message"></textarea>
+    <button type="submit" class="big-button">Send message</button>
+</form>
+
+
+</body>
+</html>

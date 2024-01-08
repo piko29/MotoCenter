@@ -193,23 +193,19 @@ public class UserService {
     }
 
     //answer message 05.01
+    public Message findMessage(Long id){
+        return messageRepository.findById(id).orElseThrow();}
     @Transactional
-    public void answerMotoProductMessage(Message messageDto,Long id){
+    public void answerMotoProductMessage(Message dto, Long id){
+        Message sourceMessage = messageRepository.findById(id).orElseThrow();
         Message message = new Message();
-        User sender = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();//important line
-        MotoProduct motoProduct = motoProductRepository.findById(id).orElseThrow();
-        System.out.println(sender);//debug
+        System.out.println(userRepository.findByEmail(getNameFromContextHolder()));
+        User sender = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();
         message.setSender(sender);
-        System.out.println("Product id:"+ id);//debug
-        message.setProductId(id);
-        System.out.println(motoProduct.getTitle());
-        message.setTitle(motoProduct.getTitle());
-        System.out.println("recipient: " + motoProduct.getUser());
-        //setrecipient was before 04.01
-        message.setUser(motoProduct.getUser());
-        //
-        message.setContent(messageDto.getContent());
-        System.out.println("motomessage: " + messageDto.getContent());
+        message.setProductId(sourceMessage.getProductId());
+        message.setTitle(sourceMessage.getTitle());
+        message.setUser(sourceMessage.getSender());
+        message.setContent(dto.getContent());
 
         messageRepository.save(message);
 

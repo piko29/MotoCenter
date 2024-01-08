@@ -31,6 +31,9 @@
             <form th:action="@{'user-messages/{id}/delete'(id=${message.getMessageId()})}" th:method="get">
                 <button class="small-button" type="submit">Delete</button>
             </form>
+            <form th:action="@{'user-messages/{id}/answer'(id=${message.getMessageId()})}" th:method="get">
+                <button class="small-button" type="submit">Answer</button>
+            </form>
 <!--            <form th:action="@{'user-products/{id}'(id=${allOwnedMotoProducts.getId()})}" th:method="get">-->
 <!--                <button class="small-button" type="submit">Details and edition</button>-->
 <!--            </form>-->

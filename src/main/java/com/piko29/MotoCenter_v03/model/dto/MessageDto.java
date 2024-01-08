@@ -13,4 +13,5 @@ public class MessageDto {
     private String content;
     private String sender;
     private String recipient;
+    private Long productId;
 }

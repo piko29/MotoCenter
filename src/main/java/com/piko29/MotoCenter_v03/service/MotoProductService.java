@@ -63,18 +63,11 @@ public class MotoProductService {
         Message message = new Message();
         User sender = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();//important line
         MotoProduct motoProduct = motoProductRepository.findById(id).orElseThrow();
-        System.out.println(sender);//debug
         message.setSender(sender);
-        System.out.println("Product id:"+ id);//debug
         message.setProductId(id);
-        System.out.println(motoProduct.getTitle());
         message.setTitle(motoProduct.getTitle());
-        System.out.println("recipient: " + motoProduct.getUser());
-        //setrecipient was before 04.01
         message.setUser(motoProduct.getUser());
-        //
         message.setContent(messageDto.getContent());
-        System.out.println("motomessage: " + messageDto.getContent());
 
         messageRepository.save(message);
 
