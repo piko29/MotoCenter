@@ -49,4 +49,5 @@ public class MotoProductController {
         return "redirect:/products";
     }
 
+
 }

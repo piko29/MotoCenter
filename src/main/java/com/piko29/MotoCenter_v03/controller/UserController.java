@@ -4,6 +4,7 @@ import com.piko29.MotoCenter_v03.model.Message;
 import com.piko29.MotoCenter_v03.model.MotoProduct;
 import com.piko29.MotoCenter_v03.model.User;
 import com.piko29.MotoCenter_v03.model.dto.MessageDto;
+import com.piko29.MotoCenter_v03.model.dto.MessageDtoMapper;
 import com.piko29.MotoCenter_v03.model.dto.MotoProductDto;
 import com.piko29.MotoCenter_v03.model.dto.UserRegistrationDto;
 import com.piko29.MotoCenter_v03.service.UserService;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -21,6 +23,7 @@ import java.util.List;
 @RequestMapping("/user-panel")
 public class UserController {
     private final UserService userService;
+    private final MessageDtoMapper messageDto;
 
     @GetMapping
     String userPanel(Model model) {
@@ -85,10 +88,28 @@ public class UserController {
 
     //04.01
     @GetMapping("/user-messages")
-    String userPanelMessages(Model model) {
+    String userPanelMessages(Model model, Long senderId) {
         List<MessageDto> allUserMessages = userService.getMessagesByUsername(userService.getNameFromContextHolder());
         model.addAttribute("allUserMessages", allUserMessages);
+//10.01
+        List<MessageDto> allSentMessages = userService.getMessagesSentByOwner();
+        model.addAttribute("allSentMessages", allSentMessages);
+//12.01 a
+//        List<MessageDto> allFilteredMessages = userService.getMessagesFromSpecificUser();
+//        model.addAttribute("allFilteredMessages", allFilteredMessages);
+        Set<String> allSenders = userService.getMessageSenders();
+        model.addAttribute("sender", allSenders);
+//15.01
+//        Set<String> sender = userService.getSenderList();
+//        model.addAttribute("sender", sender);
+
         return "user-messages";
+    }
+    @GetMapping("/user-messages/{email}")
+    String chatWithUser(Model model, @PathVariable String email){
+        List<MessageDto> messagesFromOneUser = userService.chatWithUser(email);
+        model.addAttribute("messagesFromOneUser", messagesFromOneUser);
+        return "chat-with-user";
     }
 
     //05.01
@@ -120,6 +141,12 @@ public class UserController {
         return "redirect:/user-panel/user-messages";
     }
 
+
+    /*
+    @PathVariable is for parts of the path (i.e. /person/{id})
+    @RequestParam is for the GET query parameters (i.e. /person?name="Bob").
+    @RequestBody is for the actual body of a request.
+     */
 
 
 }
