@@ -27,7 +27,8 @@
 <br>
 
 
-<form class="form-item" th:action="@{'/user-panel/user-messages/{id}/answer'(id=${messageDto.getMessageId()})}" method="post" th:object="${message}">
+<form class="form-item" th:action="@{'/user-panel/user-messages/{email}/{id}/answer'(email=${messageDto.getSender().getEmail()},
+            id=${messageDto.getMessageId()})}" method="post" th:object="${message}">
     <textarea class="message-box" rows="6" th:field="*{content}" placeholder="Text of message"></textarea>
     <button type="submit" class="big-button">Send message</button>
 </form>

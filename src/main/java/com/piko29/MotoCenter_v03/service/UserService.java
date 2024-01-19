@@ -197,7 +197,6 @@ public class UserService {
     public void answerMotoProductMessage(Message dto, Long id){
         Message sourceMessage = messageRepository.findById(id).orElseThrow();
         Message message = new Message();
-        System.out.println(userRepository.findByEmail(getNameFromContextHolder()));
         User sender = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();
         message.setSender(sender);
         message.setProductId(sourceMessage.getProductId());
@@ -205,6 +204,7 @@ public class UserService {
         message.setUser(sourceMessage.getSender());
         message.setContent(dto.getContent());
 
+        System.out.println("answer message working fine");
         messageRepository.save(message);
 
     }
@@ -253,7 +253,8 @@ public class UserService {
                 .filter(messageDto -> messageDto.getRecipient().equals(email))
                 .toList();
 
-        return Stream.concat(received.stream(),sent.stream()).collect(Collectors.toList());
+        return Stream.concat(received.stream(),sent.stream()).sorted(Comparator.comparing(MessageDto::getMessageId))
+                .collect(Collectors.toList());
 
     }
 

@@ -89,11 +89,11 @@ public class UserController {
     //04.01
     @GetMapping("/user-messages")
     String userPanelMessages(Model model, Long senderId) {
-        List<MessageDto> allUserMessages = userService.getMessagesByUsername(userService.getNameFromContextHolder());
-        model.addAttribute("allUserMessages", allUserMessages);
-//10.01
-        List<MessageDto> allSentMessages = userService.getMessagesSentByOwner();
-        model.addAttribute("allSentMessages", allSentMessages);
+//        List<MessageDto> allUserMessages = userService.getMessagesByUsername(userService.getNameFromContextHolder());
+//        model.addAttribute("allUserMessages", allUserMessages);
+////10.01
+//        List<MessageDto> allSentMessages = userService.getMessagesSentByOwner();
+//        model.addAttribute("allSentMessages", allSentMessages);
 //12.01 a
 //        List<MessageDto> allFilteredMessages = userService.getMessagesFromSpecificUser();
 //        model.addAttribute("allFilteredMessages", allFilteredMessages);
@@ -113,19 +113,24 @@ public class UserController {
     }
 
     //05.01
-    @GetMapping("/user-messages/{id}/delete")
-    String deleteMessage(@PathVariable Long id){
+    @GetMapping("/user-messages/{email}/{id}/delete")
+    String deleteMessage(@PathVariable Long id,@PathVariable String email,Model model){
+        List<MessageDto> messagesFromOneUser = userService.chatWithUser(email);
+        model.addAttribute("messagesFromOneUser", messagesFromOneUser);
         userService.deleteMessage(id);
-        return "redirect:/user-panel/user-messages";
+        return "redirect:/user-panel/user-messages/{email}";
     }
     //08.01
-    @GetMapping("/user-messages/{id}/answer")
-    String motoProductMessageForm(@PathVariable Long id,  Model model, Message message){
+    @GetMapping("/user-messages/{email}/{id}/answer")
+    String motoProductMessageForm(@PathVariable Long id,@PathVariable String email, Model model, Message message){
 //a        MotoProduct motoProduct = userService.findMotoProduct(id);
 //a        model.addAttribute("motoProduct", motoProduct);
 
 //        MotoProduct motoProduct = motoProductService.findMotoProduct(id);
 //        model.addAttribute("motoProduct", motoProduct);
+        List<MessageDto> messagesFromOneUser = userService.chatWithUser(email);
+        model.addAttribute("messagesFromOneUser", messagesFromOneUser);
+
         Message messageDto = userService.findMessage(id);
         model.addAttribute("messageDto", messageDto);
         model.addAttribute("message", message);//reading from existing message
@@ -133,12 +138,13 @@ public class UserController {
         System.out.println("reading answer message form");
         return "answer-message-form";
     }
-    @PostMapping("/user-messages/{id}/answer")
-    String motoProductMessage(@PathVariable Long id,Message dto){
+    @PostMapping("/user-messages/{email}/{id}/answer")
+    String motoProductMessage(@PathVariable Long id,@PathVariable String email,Message dto){
+        userService.chatWithUser(email);
         userService.answerMotoProductMessage(dto, id);
         //motoProductService.sendMotoProductMessage(messageDto,id);
         System.out.println("sending answer message working fine");
-        return "redirect:/user-panel/user-messages";
+        return "redirect:/user-panel/user-messages/{email}";
     }
 
 
