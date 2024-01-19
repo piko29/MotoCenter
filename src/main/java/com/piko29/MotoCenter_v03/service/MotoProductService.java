@@ -29,7 +29,7 @@ public class MotoProductService {
     private final MessageRepository messageRepository;
 
     public List<MotoProduct> findAllMotoProducts() {
-        return motoProductRepository.findAll().stream()
+        return motoProductRepository.findAll().stream().filter(motoProduct -> motoProduct.getSold() == false)
                 .toList();
     }
 
@@ -66,6 +66,30 @@ public class MotoProductService {
         message.setSender(sender);
         message.setProductId(id);
         message.setTitle(motoProduct.getTitle());
+        message.setUser(motoProduct.getUser());
+        message.setContent(messageDto.getContent());
+
+        messageRepository.save(message);
+
+    }
+    //19.01 buying product
+    @Transactional
+    public void buyMotoProduct(Long id) {
+        MotoProduct motoProduct = motoProductRepository.findById(id).orElseThrow();
+        motoProduct.setSold(true);
+        motoProduct.setBuyer(getNameFromContextHolder());
+
+        motoProductRepository.save(motoProduct);
+    }
+    //maybe something prettier
+    @Transactional
+    public void sendBuyingMessage(Message messageDto,Long id){
+        Message message = new Message();
+        User sender = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();//important line
+        MotoProduct motoProduct = motoProductRepository.findById(id).orElseThrow();
+        message.setSender(sender);
+        message.setProductId(id);
+        message.setTitle("Delivery and payment details: " + motoProduct.getTitle());
         message.setUser(motoProduct.getUser());
         message.setContent(messageDto.getContent());
 

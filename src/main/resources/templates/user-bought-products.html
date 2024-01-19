@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>MotoCenter - Bought products</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+<div class="item-left">
+    <a href="#" th:href="@{/user-panel}">Go back to user-panel</a>
+</div>
+<div class="item-right">
+    <a sec:authorize="isAuthenticated()"
+       th:text="|Log out ${#authentication.name}|"
+       href="#" th:href="@{/logout}">Log out</a>
+</div>
+<div class="container">
+    <h2>Bought products</h2>
+    <ul>
+        <li class="element-frame" th:each="motoProduct: ${allBoughtMotoProducts}">
+            <img th:src="@{${'/images/'+motoProduct.getImage()}}" width="300">
+            <br>
+            <span th:text="${'Title: ' + motoProduct.getTitle()}">example_title</span>
+            <br>
+            <span th:text="${'Price:' + motoProduct.getPrice() +' PLN'}">example_price</span>
+            <br>
+            <span th:text="${'Contact info: ' + motoProduct.getContactInfo()}">example_contact</span>
+            <br>
+            <span th:text="${'Owner: ' + motoProduct.getOwner()}">example_contact</span>
+            <br>
+            <form th:action="@{'user-products/{id}'(id=${motoProduct.getId()})}" th:method="get">
+                <button class="small-button" type="submit">Details and edition</button>
+            </form>
+            <!--button to delete motoproduct directly from list-->
+            <!--                <form th:action="@{'user-products/delete/{id}'(id=${allOwnedMotoProducts.getId()})}" th:method=get>-->
+            <!--                    <button class="small-button" type="submit">Delete</button>-->
+            <!--                </form>-->
+        </li>
+    </ul>
+</div>
+</body>
+</html>

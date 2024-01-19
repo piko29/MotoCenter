@@ -34,6 +34,12 @@
     <form th:action="@{user-panel/user-messages}" th:method="get">
         <button class="big-button" type="submit">Check messages</button>
     </form>
+    <form th:action="@{user-panel/sold-products}" th:method="get">
+        <button class="big-button" type="submit">Sold products</button>
+    </form>
+    <form th:action="@{user-panel/bought-products}" th:method="get">
+        <button class="big-button" type="submit">Bought products</button>
+    </form>
     <h2>Users list</h2>
     <ul>
         <li class="element-frame" th:each="email: ${userEmails}">

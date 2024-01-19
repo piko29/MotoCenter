@@ -27,7 +27,7 @@ public class MotoProductController {
         return "moto-product-panel";
     }
 
-    @GetMapping("/{id}")//maybe change this to findMotoProduct method
+    @GetMapping("/{id}")
     String motoProductDetails(@PathVariable Long id, Model model){
         List<MotoProduct> allDetails = motoProductService.getMotoProductById(id);
         model.addAttribute("motoDetails", allDetails);
@@ -45,6 +45,24 @@ public class MotoProductController {
     @PostMapping("/{id}/message")
     String motoProductMessage(@PathVariable Long id, Message messageDto){
         motoProductService.sendMotoProductMessage(messageDto,id);
+        System.out.println("sending message working fine");
+        return "redirect:/products";
+    }
+
+    //19.01 buying
+    @GetMapping("/{id}/buy")
+    String buyMotoProductForm(@PathVariable Long id,Message messageDto, Model model){
+        motoProductService.buyMotoProduct(id);
+        MotoProduct motoProduct = motoProductService.findMotoProduct(id);
+        model.addAttribute("motoProduct", motoProduct);
+        model.addAttribute("messageDto", messageDto);
+//        List<MotoProduct> allDetails = motoProductService.getMotoProductById(id);
+//        model.addAttribute("motoDetails", allDetails);
+        return "moto-message-form";
+    }
+    @PostMapping("/{id}/buy")
+    String buyMotoProductMessage(@PathVariable Long id, Message messageDto){
+        motoProductService.sendBuyingMessage(messageDto,id);
         System.out.println("sending message working fine");
         return "redirect:/products";
     }

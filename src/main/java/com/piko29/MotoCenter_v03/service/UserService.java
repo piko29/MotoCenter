@@ -36,6 +36,7 @@ public class UserService {
     private final MessageDtoMapper messageDtoMapper;
 
 
+
     public Optional<UserCredentialsDto> findCredentialsByEmail(String email) {
         return userRepository.findByEmail(email)
                 .map(UserCredentialsDtoMapper::map);
@@ -122,6 +123,7 @@ public class UserService {
                 .map(User::getMotoProductList)
                 .orElse(Collections.emptyList())
                 .stream()
+                .filter(motoProduct -> motoProduct.getSold() == false)
                 .map(motoProductDtoMapper::map)
                 .toList();
 
@@ -159,6 +161,9 @@ public class UserService {
         motoProduct.setUser(user);
 //        motoProduct.getUser().setId(motoProduct.getUser().getId()); //not needed
         motoProduct.setOwner(getNameFromContextHolder());
+        //19.01
+        motoProduct.setSold(false);
+        motoProduct.setBuyer("");
 
         motoProductRepository.save(motoProduct);
     }
@@ -209,14 +214,6 @@ public class UserService {
 
     }
 
-    //10.01 chat feature
-    //show messages from one user about one topic(visible) as 1 element
-    //add option "details","delete" to this option
-    //click on details and open messages to you and from you about 1 topic
-    //below automatically show TopicTextSendMessage form(as in MotoProduct PM)
-    //as a continuation of the conversation
-    //add option to delete your single message
-    //add option to delete whole conversation
 
     public List<MessageDto> getMessagesSentByOwner() {
         return messageRepository.findMessagesBySender
@@ -257,6 +254,33 @@ public class UserService {
                 .collect(Collectors.toList());
 
     }
+//19.01 sold motoProducts
+public List<MotoProductDto> getSoldProductsByUsername(String username) {
+    return userRepository.findByEmail(username)
+            .map(User::getMotoProductList)
+            .orElse(Collections.emptyList())
+            .stream()
+            .filter(motoProduct -> motoProduct.getSold() == true)
+            .map(motoProductDtoMapper::map)
+            .toList();
+
+}
+    public List<MotoProduct> getBoughtProductsByUsername() {
+        return motoProductRepository.findAll().stream()
+                .filter(motoProduct -> motoProduct.getBuyer().equals(getNameFromContextHolder()))
+                .toList();
+
+
+    }
+//public List<MotoProductDto> getBoughtProductsByUsername(String username) {
+//    return userRepository.findByEmail(username)
+//            .map(User::getMotoProductList)
+//            .orElse(Collections.emptyList())
+//            .stream()
+//            .filter(motoProduct -> motoProduct.getSold() == true)
+//            .map(motoProductDtoMapper::map)
+//            .toList();
+//}
 
 
 }

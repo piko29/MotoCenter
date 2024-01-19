@@ -23,10 +23,10 @@ VALUES
 
 
 INSERT INTO
-    moto_product (title, description,image,price,contact_info,user_id,owner)
+    moto_product (title, description,image,price,contact_info,user_id,owner, sold, buyer)
 VALUES
-    ('Honda CBR1000RR-R Fireblade','217KM 113Nm 200kg','honda-cbr-1000rr.jpg',125300,'+48123456789',1,'superadmin@email.com'),
-    ('Honda CBR650R','95KM 63Nm 208kg','honda-cbr-650r.jpg',43300,'+48987654321',1,'superadmin@email.com'),
-    ('HJC RPHA 1 Helmet','One of the best existing helmets','hjc-rpha-1.jpg',3700,'+48123654789',1,'superadmin@email.com'),
-    ('Rebelhorn Fighter Jacket','Solid cheap leather jacket','rebelhorn-jacket.jpg',1300,'+48123654789',1,'superadmin@email.com');
+    ('Honda CBR1000RR-R Fireblade','217KM 113Nm 200kg','honda-cbr-1000rr.jpg',125300,'+48123456789',1,'superadmin@email.com', false, ''),
+    ('Honda CBR650R','95KM 63Nm 208kg','honda-cbr-650r.jpg',43300,'+48987654321',1,'superadmin@email.com', false, ''),
+    ('HJC RPHA 1 Helmet','One of the best existing helmets','hjc-rpha-1.jpg',3700,'+48123654789',1,'superadmin@email.com', false, ''),
+    ('Rebelhorn Fighter Jacket','Solid cheap leather jacket','rebelhorn-jacket.jpg',1300,'+48123654789',1,'superadmin@email.com', false, '');
 

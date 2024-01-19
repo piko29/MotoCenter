@@ -3,6 +3,7 @@ package com.piko29.MotoCenter_v03.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 
 
 @Entity
@@ -30,4 +31,7 @@ public class MotoProduct {
 //    @ManyToOne
 //    @JoinColumn(name = "user_email")
     private String owner;
+//19.01 buying
+    private Boolean sold;
+    private String buyer;
 }

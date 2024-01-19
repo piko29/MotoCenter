@@ -31,8 +31,9 @@
             <form th:action="@{'/products/{id}'(id=${motoProduct.id})}" th:method="get">
                 <button class="small-button" type="submit">Details</button>
             </form>
-
-            <button class="small-button" type="submit" >Buy</button>
+            <form th:action="@{'/products/{id}/buy'(id=${motoProduct.id})}" th:method="get">
+                <button class="small-button" type="submit">Buy</button>
+            </form>
         </li>
     </ul>
 </div>

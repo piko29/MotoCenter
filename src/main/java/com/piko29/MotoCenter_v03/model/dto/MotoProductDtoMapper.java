@@ -23,9 +23,11 @@ public class MotoProductDtoMapper {
         dto.setContactInfo(motoProduct.getContactInfo());
 //        //adding userid to motoproduct 06.12 different idea
         dto.setUserId(motoProduct.getUser().getId());
-
+        //19.01 buying
+        dto.setSold(motoProduct.getSold());
 //        //20.12 adding emais as username to motoproduct
 //        dto.setOwner(motoProduct.getUser().getEmail());
+        dto.setBuyer(motoProduct.getBuyer());
         return dto;
     }
     public MotoProduct map(MotoProductDto dto){
@@ -39,6 +41,10 @@ public class MotoProductDtoMapper {
 //        //adding user id to motoproduct 06.12 different idea
         User user = userRepository.findById(dto.getUserId()).orElseThrow();
         motoProduct.setUser(user);
+
+        //19.01 buying
+        motoProduct.setSold(dto.getSold());
+        motoProduct.setBuyer(dto.getBuyer());
 
         //20.12 adding emais as username to motoproduct
 //        User user = userRepository.findByEmail(dto.getOwner()).orElseThrow();

@@ -147,6 +147,21 @@ public class UserController {
         return "redirect:/user-panel/user-messages/{email}";
     }
 
+//19.01 sold products
+@GetMapping("/sold-products")
+String userPanelSoldMotoProducts(Model model) {
+    List<MotoProductDto> allSoldMotoProducts = userService.getSoldProductsByUsername
+            (userService.getNameFromContextHolder());
+    model.addAttribute("allSoldMotoProducts", allSoldMotoProducts);
+    return "user-sold-products";
+}
+@GetMapping("/bought-products")
+String userPanelBoughtMotoProducts(Model model) {
+    List<MotoProduct> allBoughtMotoProducts = userService.getBoughtProductsByUsername();
+    model.addAttribute("allBoughtMotoProducts", allBoughtMotoProducts);
+    return "user-bought-products";
+}
+
 
     /*
     @PathVariable is for parts of the path (i.e. /person/{id})

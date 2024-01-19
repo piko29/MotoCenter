@@ -36,5 +36,7 @@ CREATE TABLE moto_product
     price           INT NOT NULL,
     contact_info    VARCHAR(200) NOT NULL,
     user_id         BIGINT,
-    owner           VARCHAR(200) NOT NULL
+    owner           VARCHAR(200) NOT NULL,
+    sold            BOOLEAN,
+    buyer           VARCHAR(100) NOT NULL
 );
