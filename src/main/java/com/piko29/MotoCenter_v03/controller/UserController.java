@@ -41,8 +41,6 @@ public class UserController {
         return "user-panel";
     }
 
-
-//added 09.12
     @GetMapping("/user-products")
     String userPanelMotoProducts(Model model) {
     List<MotoProductDto> allOwnedMotoProducts = userService.getProductsByUsername(userService.getNameFromContextHolder());
@@ -51,21 +49,19 @@ public class UserController {
     }
 
 
-    //details 14.12
     @GetMapping("/user-products/{id}")
     String motoProductDetails(@PathVariable Long id, Model model){
         List<MotoProduct> allDetails = userService.getMotoProductById(id);
         model.addAttribute("motoDetails", allDetails);
         return "owned-moto-product-details";
     }
-    //delete MotoProduct 14.12
+
     @GetMapping("/user-products/{id}/delete")
     String deleteMotoProduct(@PathVariable Long id){
             userService.deleteMotoProduct(id);
             return "redirect:/user-panel/user-products";
     }
 
-    //adding MotoProduct 20.12
     @GetMapping("/add")
     String addMotoProductForm(Model model){
         MotoProductDto motoProduct = new MotoProductDto();
@@ -75,9 +71,8 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    String addMotoProduct(MotoProductDto motoProductDto, @RequestParam("img") MultipartFile file, Model model)
+    String addMotoProduct(MotoProductDto motoProductDto, @RequestParam("img") MultipartFile file)
             throws IOException {
-        //24.01 uploading pictures
         StringBuilder fileNames = new StringBuilder();
         Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
         fileNames.append(file.getOriginalFilename());
@@ -91,33 +86,7 @@ public class UserController {
         return "redirect:/user-panel";
     }
 
-    //26.01 test adding picture
 
-    @GetMapping("/uploadimage")
-    public String displayUploadForm() {
-        return "example";
-    }
-
-    @PostMapping("/uploadimage")
-    public String uploadImage(Model model, MultipartFile file) throws IOException {
-        StringBuilder fileNames = new StringBuilder();
-        System.out.println(fileNames);
-
-        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
-        System.out.println(file.getOriginalFilename());
-
-        fileNames.append(file.getOriginalFilename());
-
-        Files.write(fileNameAndPath, file.getBytes());
-        System.out.println(fileNameAndPath);
-
-
-        model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
-        return "user-panel";
-    }
-
-
-    //edit motoproduct 23.12
     @GetMapping("/user-products/{id}/edit")
     String editMotoProductForm(Model model,@PathVariable Long id){
         MotoProduct motoProduct = userService.findMotoProduct(id);
@@ -130,22 +99,10 @@ public class UserController {
         return "redirect:/user-panel/user-products";
     }
 
-    //04.01
     @GetMapping("/user-messages")
-    String userPanelMessages(Model model, Long senderId) {
-//        List<MessageDto> allUserMessages = userService.getMessagesByUsername(userService.getNameFromContextHolder());
-//        model.addAttribute("allUserMessages", allUserMessages);
-////10.01
-//        List<MessageDto> allSentMessages = userService.getMessagesSentByOwner();
-//        model.addAttribute("allSentMessages", allSentMessages);
-//12.01 a
-//        List<MessageDto> allFilteredMessages = userService.getMessagesFromSpecificUser();
-//        model.addAttribute("allFilteredMessages", allFilteredMessages);
+    String userPanelMessages(Model model) {
         Set<String> allSenders = userService.getMessageSenders();
         model.addAttribute("sender", allSenders);
-//15.01
-//        Set<String> sender = userService.getSenderList();
-//        model.addAttribute("sender", sender);
 
         return "user-messages";
     }
@@ -167,11 +124,7 @@ public class UserController {
     //08.01
     @GetMapping("/user-messages/{email}/{id}/answer")
     String motoProductMessageForm(@PathVariable Long id,@PathVariable String email, Model model, Message message){
-//a        MotoProduct motoProduct = userService.findMotoProduct(id);
-//a        model.addAttribute("motoProduct", motoProduct);
 
-//        MotoProduct motoProduct = motoProductService.findMotoProduct(id);
-//        model.addAttribute("motoProduct", motoProduct);
         List<MessageDto> messagesFromOneUser = userService.chatWithUser(email);
         model.addAttribute("messagesFromOneUser", messagesFromOneUser);
 
@@ -179,39 +132,28 @@ public class UserController {
         model.addAttribute("messageDto", messageDto);
         model.addAttribute("message", message);//reading from existing message
 
-        System.out.println("reading answer message form");
         return "answer-message-form";
     }
     @PostMapping("/user-messages/{email}/{id}/answer")
     String motoProductMessage(@PathVariable Long id,@PathVariable String email,Message dto){
         userService.chatWithUser(email);
         userService.answerMotoProductMessage(dto, id);
-        //motoProductService.sendMotoProductMessage(messageDto,id);
-        System.out.println("sending answer message working fine");
+
         return "redirect:/user-panel/user-messages/{email}";
     }
 
-//19.01 sold products
-@GetMapping("/sold-products")
-String userPanelSoldMotoProducts(Model model) {
-    List<MotoProductDto> allSoldMotoProducts = userService.getSoldProductsByUsername
-            (userService.getNameFromContextHolder());
-    model.addAttribute("allSoldMotoProducts", allSoldMotoProducts);
-    return "user-sold-products";
-}
-@GetMapping("/bought-products")
-String userPanelBoughtMotoProducts(Model model) {
-    List<MotoProduct> allBoughtMotoProducts = userService.getBoughtProductsByUsername();
-    model.addAttribute("allBoughtMotoProducts", allBoughtMotoProducts);
-    return "user-bought-products";
-}
-
-
-    /*
-    @PathVariable is for parts of the path (i.e. /person/{id})
-    @RequestParam is for the GET query parameters (i.e. /person?name="Bob").
-    @RequestBody is for the actual body of a request.
-     */
-
+    @GetMapping("/sold-products")
+    String userPanelSoldMotoProducts(Model model) {
+        List<MotoProductDto> allSoldMotoProducts = userService.getSoldProductsByUsername
+                (userService.getNameFromContextHolder());
+        model.addAttribute("allSoldMotoProducts", allSoldMotoProducts);
+        return "user-sold-products";
+    }
+    @GetMapping("/bought-products")
+    String userPanelBoughtMotoProducts(Model model) {
+        List<MotoProduct> allBoughtMotoProducts = userService.getBoughtProductsByUsername();
+        model.addAttribute("allBoughtMotoProducts", allBoughtMotoProducts);
+        return "user-bought-products";
+    }
 
 }

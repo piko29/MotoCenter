@@ -18,9 +18,7 @@ public class MessageDtoMapper {
         dto.setTitle(message.getTitle());
         dto.setContent(message.getContent());
         dto.setSender(message.getSender().getEmail());
-        //05.01 to show list of messages
         dto.setRecipient(message.getUser().getEmail());
-        //06.01 adding product id
         dto.setProductId(message.getProductId());
         return dto;
     }
@@ -33,9 +31,7 @@ public class MessageDtoMapper {
         User sender = userRepository.findByEmail(dto.getSender()).orElseThrow();
         message.setSender(sender);
         User recipient = userRepository.findByEmail(dto.getRecipient()).orElseThrow();
-        //05.01 to show list of messages
         message.setUser(recipient);
-        //06.01 adding product id
         message.setProductId(dto.getProductId());
 
         return message;

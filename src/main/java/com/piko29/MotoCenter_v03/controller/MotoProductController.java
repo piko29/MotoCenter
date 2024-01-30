@@ -49,7 +49,6 @@ public class MotoProductController {
         return "redirect:/products";
     }
 
-    //19.01 buying
     @GetMapping("/{id}/buy")
     String buyMotoProductForm(@PathVariable Long id,Message messageDto, Model model){
         motoProductService.buyMotoProduct(id);

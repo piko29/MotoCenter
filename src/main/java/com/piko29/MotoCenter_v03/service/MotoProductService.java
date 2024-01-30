@@ -41,16 +41,6 @@ public class MotoProductService {
         return motoProductRepository.findById(id).orElseThrow();
     }
 
-    //private message 29.12
-    /*
-    -tworzenie formularza wiadomości, można przypisać do motoproduct?
-    -pobieranie loginu użytkownika-sendera z getcontextholder
-    -pobieranie właściciela z ogłoszenia
-    -wpisywanie treści wiadomości w formularzu(większe okienko)
-    -wysyłanie za pomocą przycisku metodą post
-    -w panelu użytkownika przycisk z zakładką prywatne wiadomości
-    -wyświtelanie wszystkich wiadomości (np. w liście)
-     */
     public String getNameFromContextHolder() {
 
         return SecurityContextHolder.getContext()
@@ -72,7 +62,6 @@ public class MotoProductService {
         messageRepository.save(message);
 
     }
-    //19.01 buying product
     @Transactional
     public void buyMotoProduct(Long id) {
         MotoProduct motoProduct = motoProductRepository.findById(id).orElseThrow();
@@ -81,7 +70,6 @@ public class MotoProductService {
 
         motoProductRepository.save(motoProduct);
     }
-    //maybe something prettier
     @Transactional
     public void sendBuyingMessage(Message messageDto,Long id){
         Message message = new Message();
@@ -96,6 +84,5 @@ public class MotoProductService {
         messageRepository.save(message);
 
     }
-
 
 }

@@ -10,13 +10,8 @@ import java.util.Optional;
 
 //later
 public interface MessageRepository extends JpaRepository<Message, Long> {
-    //10.01 for showing message
     Optional<Message> findMessageBySender(User sender);
     List<Message> findMessagesBySender(User sender);
 
-    //test
-//    List<Message> findMessagesBySenderString(String sender);
-//    List<Message> findMessagesBySenderAndTitle(String sender, String title);
-//    Optional<Message> findByTitle(String title);
 
 }

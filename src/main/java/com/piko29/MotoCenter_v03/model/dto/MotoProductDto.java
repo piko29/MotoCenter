@@ -14,11 +14,9 @@ public class MotoProductDto {
     private String image;
     private int price;
     private String contactInfo;
-    private Long userId;//zmienione na user 06.12 sprawdz
-    //20.12 username of owner
+    private Long userId;
     private String owner;
 
-    //19.01 buying
     private Boolean sold;
     private String buyer;
 

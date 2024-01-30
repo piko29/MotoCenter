@@ -4,7 +4,7 @@ import com.piko29.MotoCenter_v03.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDtoMapper { //may be not necessary
+public class UserDtoMapper {
     UserDto map(User user) {
         UserDto dto = new UserDto();
         dto.setId(user.getId());

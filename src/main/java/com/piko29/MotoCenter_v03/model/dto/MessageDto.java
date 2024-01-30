@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MessageDto {
-    //firstly without productId
     private Long messageId;
     private String title;
     private String content;

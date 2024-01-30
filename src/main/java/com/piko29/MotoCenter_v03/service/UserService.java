@@ -34,12 +34,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
-    //added 06.12 to check motoproduct by person id
     private final MotoProductDtoMapper motoProductDtoMapper;
-    //added 14.12
     private final MotoProductRepository motoProductRepository;
-    //added 04.01
-    private final MessageRepository messageRepository;//to check
+    private final MessageRepository messageRepository;
     private final MessageDtoMapper messageDtoMapper;
 
 
@@ -48,7 +45,6 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .map(UserCredentialsDtoMapper::map);
     }
-
 
     public List<String> findAllUserEmails() {
         return userRepository.findAllUsersByRoles_Name(USER_ROLE)
@@ -97,7 +93,6 @@ public class UserService {
                         || authority.getAuthority().equals("ROLE_ADMIN"));
     }
 
-
     @Transactional
     public void changeCurrentUserPassword(String newPassword) {
         String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -106,25 +101,21 @@ public class UserService {
         currentUser.setPassword(newPasswordHash);
     }
 
-
-    //added 06.12
     public String getNameFromContextHolder() {
 
         return SecurityContextHolder.getContext()
                 .getAuthentication().getName();
 
     }
-    //later for message, check
+
     public User getUserById(Long id) {
         return new User();
     }
 
-    //all user data, not necessary currently, might delete
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    //added 09.12
     public List<MotoProductDto> getProductsByUsername(String username) {
         return userRepository.findByEmail(username)
                 .map(User::getMotoProductList)
@@ -135,51 +126,40 @@ public class UserService {
                 .toList();
 
     }
-    //added 14.12
 
-    //firstly show details
     public List<MotoProduct> getMotoProductById(Long id){
         return motoProductRepository.findById(id).stream().toList();
     }
-    //delete product 14.12
-    //make sure if it should be @Transactional
+
     @Transactional
     public void deleteMotoProduct(Long id){
         motoProductRepository.deleteById(id);
     }
-    //29.12 for controller
+
     @Transactional
     public MotoProduct findMotoProduct(Long id){
         return motoProductRepository.findById(id).orElseThrow();
     }
-    //29.12 for controller ending
 
-    //add motoproduct 20.12
 @Transactional
     public void saveMotoProduct(MotoProductDto dto, String fileName) throws IOException {
         MotoProduct motoProduct = new MotoProduct();
 
-
         motoProduct.setTitle(dto.getTitle());
         motoProduct.setDescription(dto.getDescription());
-        //eventually implement adding pictures to database
         motoProduct.setImage(fileName);
-    System.out.println(fileName);
         motoProduct.setPrice(dto.getPrice());
         motoProduct.setContactInfo(dto.getContactInfo());
-        User user = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();//important line
+        User user = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();
         motoProduct.setUser(user);
-//        motoProduct.getUser().setId(motoProduct.getUser().getId()); //not needed
         motoProduct.setOwner(getNameFromContextHolder());
-        //19.01
         motoProduct.setSold(false);
         motoProduct.setBuyer("");
 
         motoProductRepository.save(motoProduct);
     }
 
-    //edit motoproduct 23.12
-@Transactional
+    @Transactional
     public void editMotoProduct(MotoProductDto dto, Long id){
         MotoProduct motoProduct = motoProductRepository.findById(id).orElseThrow();
         motoProduct.setTitle(dto.getTitle());
@@ -188,8 +168,8 @@ public class UserService {
         motoProduct.setContactInfo(dto.getContactInfo());
 
         motoProductRepository.save(motoProduct);
-}
-    //reading message about motoproduct 04.01
+    }
+
     public List<MessageDto> getMessagesByUsername(String username) {
         return userRepository.findByEmail(username)
                 .map(User::getMessageList)
@@ -199,13 +179,12 @@ public class UserService {
                 .toList();
 
     }
-    //deleting message 05.01
+
     @Transactional
     public void deleteMessage(Long id){
         messageRepository.deleteById(id);
     }
 
-    //answer message 05.01
     public Message findMessage(Long id){
         return messageRepository.findById(id).orElseThrow();}
     @Transactional
@@ -219,11 +198,8 @@ public class UserService {
         message.setUser(sourceMessage.getSender());
         message.setContent(dto.getContent());
 
-        System.out.println("answer message working fine");
         messageRepository.save(message);
-
     }
-
 
     public List<MessageDto> getMessagesSentByOwner() {
         return messageRepository.findMessagesBySender
@@ -234,7 +210,6 @@ public class UserService {
 
     }
 
-//15.01 modified
     public Set<String> getMessageSenders(){
         List<MessageDto> allReceivedMessages = getMessagesByUsername(getNameFromContextHolder());
 
@@ -245,7 +220,6 @@ public class UserService {
         return senders;
 
     }
-//15.01 chat with specific user, 17.01 updated with owner messages
     public List<MessageDto> chatWithUser(String email){
 
         List<MessageDto> received = messageRepository.findMessagesBySender
@@ -264,17 +238,17 @@ public class UserService {
                 .collect(Collectors.toList());
 
     }
-//19.01 sold motoProducts
-public List<MotoProductDto> getSoldProductsByUsername(String username) {
-    return userRepository.findByEmail(username)
-            .map(User::getMotoProductList)
-            .orElse(Collections.emptyList())
-            .stream()
-            .filter(motoProduct -> motoProduct.getSold() == true)
-            .map(motoProductDtoMapper::map)
-            .toList();
 
-}
+    public List<MotoProductDto> getSoldProductsByUsername(String username) {
+        return userRepository.findByEmail(username)
+                .map(User::getMotoProductList)
+                .orElse(Collections.emptyList())
+                .stream()
+                .filter(motoProduct -> motoProduct.getSold() == true)
+                .map(motoProductDtoMapper::map)
+                .toList();
+
+    }
     public List<MotoProduct> getBoughtProductsByUsername() {
         return motoProductRepository.findAll().stream()
                 .filter(motoProduct -> motoProduct.getBuyer().equals(getNameFromContextHolder()))
@@ -282,15 +256,6 @@ public List<MotoProductDto> getSoldProductsByUsername(String username) {
 
 
     }
-//public List<MotoProductDto> getBoughtProductsByUsername(String username) {
-//    return userRepository.findByEmail(username)
-//            .map(User::getMotoProductList)
-//            .orElse(Collections.emptyList())
-//            .stream()
-//            .filter(motoProduct -> motoProduct.getSold() == true)
-//            .map(motoProductDtoMapper::map)
-//            .toList();
-//}
 
 
 }

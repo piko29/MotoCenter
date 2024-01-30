@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface MotoProductRepository extends JpaRepository<MotoProduct, Long> {
-    //29.12 long zmienione na Long i Optional
+
     Optional<MotoProduct> findById(Long id);
     MotoProduct findByTitle(String title);
     List<MotoProduct> findAllByOrderByIdAsc();
-    //List<MotoProduct> findAllByCategoryId();//sorting and categories, currenty unused
+
 }

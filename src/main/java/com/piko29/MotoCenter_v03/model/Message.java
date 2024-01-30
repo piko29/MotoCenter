@@ -16,8 +16,7 @@ public class Message {
     private String content;
     @ManyToOne
     private User sender;
-    //05.01 making recipient user to show list of messages
-    @ManyToOne //recipient
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

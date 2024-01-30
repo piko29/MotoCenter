@@ -13,25 +13,16 @@ import org.springframework.beans.factory.annotation.Value;
 public class MotoProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //was Generation.Auto, which caused primary key error!!!
     private Long id;
     private String title;
     private String description;
     private String image;
     private int price;
     private String contactInfo;
-//    //added 06.12 to join userid
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    //you can add type and category maybe
-
-    //20.12 for adding and editting with username
-    //it may be changed to connetc collumn username but probably not necessary
-//    @ManyToOne
-//    @JoinColumn(name = "user_email")
     private String owner;
-//19.01 buying
     private Boolean sold;
     private String buyer;
 }
