@@ -13,7 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -24,6 +30,8 @@ import java.util.Set;
 public class UserController {
     private final UserService userService;
     private final MessageDtoMapper messageDto;
+    //24.01 uploading pictures
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/images";
 
     @GetMapping
     String userPanel(Model model) {
@@ -67,11 +75,47 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    String addMotoProduct(MotoProductDto motoProductDto){
-        userService.saveMotoProduct(motoProductDto);
-        System.out.println("adding done - controller");
+    String addMotoProduct(MotoProductDto motoProductDto, @RequestParam("img") MultipartFile file, Model model)
+            throws IOException {
+        //24.01 uploading pictures
+        StringBuilder fileNames = new StringBuilder();
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+        fileNames.append(file.getOriginalFilename());
+
+        Files.write(fileNameAndPath, file.getBytes());
+
+//        model.addAttribute("msg", fileNames);
+
+        userService.saveMotoProduct(motoProductDto,file.getOriginalFilename());
+        System.out.println("adding picture done - controller");
         return "redirect:/user-panel";
     }
+
+    //26.01 test adding picture
+
+    @GetMapping("/uploadimage")
+    public String displayUploadForm() {
+        return "example";
+    }
+
+    @PostMapping("/uploadimage")
+    public String uploadImage(Model model, MultipartFile file) throws IOException {
+        StringBuilder fileNames = new StringBuilder();
+        System.out.println(fileNames);
+
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+        System.out.println(file.getOriginalFilename());
+
+        fileNames.append(file.getOriginalFilename());
+
+        Files.write(fileNameAndPath, file.getBytes());
+        System.out.println(fileNameAndPath);
+
+
+        model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
+        return "user-panel";
+    }
+
 
     //edit motoproduct 23.12
     @GetMapping("/user-products/{id}/edit")

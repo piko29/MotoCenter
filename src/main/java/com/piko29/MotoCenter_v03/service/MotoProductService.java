@@ -85,7 +85,7 @@ public class MotoProductService {
     @Transactional
     public void sendBuyingMessage(Message messageDto,Long id){
         Message message = new Message();
-        User sender = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();//important line
+        User sender = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();
         MotoProduct motoProduct = motoProductRepository.findById(id).orElseThrow();
         message.setSender(sender);
         message.setProductId(id);

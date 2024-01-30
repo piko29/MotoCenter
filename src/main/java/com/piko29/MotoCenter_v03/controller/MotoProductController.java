@@ -56,14 +56,11 @@ public class MotoProductController {
         MotoProduct motoProduct = motoProductService.findMotoProduct(id);
         model.addAttribute("motoProduct", motoProduct);
         model.addAttribute("messageDto", messageDto);
-//        List<MotoProduct> allDetails = motoProductService.getMotoProductById(id);
-//        model.addAttribute("motoDetails", allDetails);
-        return "moto-message-form";
+        return "buying-product-form";
     }
     @PostMapping("/{id}/buy")
     String buyMotoProductMessage(@PathVariable Long id, Message messageDto){
         motoProductService.sendBuyingMessage(messageDto,id);
-        System.out.println("sending message working fine");
         return "redirect:/products";
     }
 

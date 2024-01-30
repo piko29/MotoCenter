@@ -21,7 +21,7 @@
 <div class="products-container">
     <ul>
         <li class="element-frame" th:each="motoProduct: ${motoDetails}">
-            <img th:src="@{${'/images/'+motoProduct.image}}" width="800">
+            <img th:src="@{${'/images/'+motoProduct.image}}" width="1500">
             <br>
             <span th:text="${'Title: ' + motoProduct.title}">example_title</span>
             <br>

@@ -14,10 +14,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static com.piko29.MotoCenter_v03.controller.UserController.UPLOAD_DIRECTORY;
 
 @Service
 @AllArgsConstructor
@@ -149,12 +156,15 @@ public class UserService {
 
     //add motoproduct 20.12
 @Transactional
-    public void saveMotoProduct(MotoProductDto dto) {
+    public void saveMotoProduct(MotoProductDto dto, String fileName) throws IOException {
         MotoProduct motoProduct = new MotoProduct();
+
+
         motoProduct.setTitle(dto.getTitle());
         motoProduct.setDescription(dto.getDescription());
         //eventually implement adding pictures to database
-        motoProduct.setImage("example.jpg");
+        motoProduct.setImage(fileName);
+    System.out.println(fileName);
         motoProduct.setPrice(dto.getPrice());
         motoProduct.setContactInfo(dto.getContactInfo());
         User user = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();//important line

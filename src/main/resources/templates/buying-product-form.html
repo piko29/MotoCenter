@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Send transaction details</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+</head>
+<body>
+<div class="item-left">
+    <a href="#" th:href="@{/products}">Go back to products</a>
+</div>
+<div class="item-right">
+    <a sec:authorize="isAuthenticated()"
+       th:text="|Log out ${#authentication.name}|"
+       href="#" th:href="@{/logout}">Log out</a>
+</div>
+<br>
+<div class="container">
+    <h1 class="header" style="font-family:fantasy">Send details about payment and delivery</h1>
+    <i class="fa-regular fa-envelope fa-4x"></i>
+</div>
+
+<div th:text="${'Title: ' + motoProduct.title}">Title: </div>
+<div th:text="${'Owner: ' + motoProduct.user.getEmail()}">Owner: </div>
+<br>
+
+
+<form class="form-item" th:action="@{'/products/{id}/buy'(id=${motoProduct.id})}" method="post" th:object="${messageDto}">
+    <!--    <input class="message-box" rows="6" th:field="${messageDto.getContent()}" placeholder="Text of message"></input>-->
+    <textarea class="message-box" rows="6" th:field="*{content}" placeholder="Write details about delivery and payment"></textarea>
+    <button type="submit" class="big-button">Send message</button>
+</form>
+
+
+</body>
+</html>
