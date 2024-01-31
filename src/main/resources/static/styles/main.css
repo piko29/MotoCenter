@@ -1,6 +1,6 @@
 .container {
-    margin: 0 auto;
-    max-width: 1650px;
+    margin: auto;
+    max-width: 1300px;
     text-align: center;
 }
 .products-container {
@@ -35,7 +35,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    margin-top: 16px;
+    margin: 16px;
     align-items: center;
 }
 
@@ -81,4 +81,10 @@
     padding: 10px;
     display: inline-block;
     align-items: center;
+}
+.custom-form-floating {
+    margin-top: 10px;
+}
+.no-resize {
+    resize: none;
 }

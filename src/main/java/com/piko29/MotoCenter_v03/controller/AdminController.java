@@ -17,15 +17,20 @@ class AdminController {
     private final UserService userService;
 
     @GetMapping
-    String adminPanel(Model model) {
-        List<String> allUserEmails = userService.findAllUserEmails();
-        model.addAttribute("userEmails", allUserEmails);
+    String adminPanel(){
         return "admin-panel";
     }
 
-    @GetMapping("/delete-user")
+    @GetMapping("/users-list")
+    String usersList(Model model) {
+        List<String> allUserEmails = userService.findAllUserEmails();
+        model.addAttribute("userEmails", allUserEmails);
+        return "users-management";
+    }
+
+    @GetMapping("/users-list/delete-user")
     String deleteUser(@RequestParam String email) {
         userService.deleteUserByEmail(email);
-        return "redirect:/admin";
+        return "redirect:/admin/users-list";
     }
 }

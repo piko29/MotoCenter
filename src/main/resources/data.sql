@@ -1,7 +1,7 @@
 INSERT INTO
     application_user (first_name, last_name, email, password)
 VALUES
-    -- superadmin@example.com / admin
+    -- superadmin@email.com / admin
     ('John', 'Taylor', 'superadmin@email.com', '{bcrypt}$2a$10$fjJ92utGZVSINQWeC6PAeuZTGgaEAn4gEKCnXTjm0TCC.JyQYGMLC'),
     -- jack@email.com / dogcat
     ('Jack', 'Blue', 'jack@email.com', '{MD5}4b57d50cd514088317d7f46176f3d57b'),

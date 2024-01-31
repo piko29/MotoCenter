@@ -34,11 +34,15 @@ public class UserController {
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/images";
 
     @GetMapping
-    String userPanel(Model model) {
-        List<String> allUserEmails = userService.findAllUserEmails();
-        model.addAttribute("userEmails", allUserEmails);
-        System.out.println(userService.getNameFromContextHolder());
+    String userPanel() {
+//        List<String> allUserEmails = userService.findAllUserEmails();
+//        model.addAttribute("userEmails", allUserEmails);
+//        System.out.println(userService.getNameFromContextHolder());
         return "user-panel";
+    }
+    @GetMapping("/change-password")
+    String changePassword(){
+        return "change-password";
     }
 
     @GetMapping("/user-products")

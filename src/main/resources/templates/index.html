@@ -4,19 +4,41 @@
     <meta charset="UTF-8">
     <title>MotoCenter</title>
     <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
+<header class="p-3 text-bg-dark d-flex justify-content-center py-2">
+    <form class="item-right" th:action="@{/logout}" th:method="get">
+        <button class="btn btn-outline-warning me-3" sec:authorize="isAuthenticated()"
+                th:text="|Log out ${#authentication.name}|" type="submit">Log out</button>
+    </form>
+</header>
 <div class="container">
     <h1>Welcome to MotoCenter!!</h1>
     <img src="../static/images/MotoCenter.png" th:src="@{images/MotoCenter.png}"
          alt="Safe page"
          class="full-image"
     />
-    <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" href="#" th:href="@{/user-panel}"> User panel </a>
-    &nbsp;&nbsp;
-    <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" th:href="@{/admin}"> Administrator panel </a>
-    <br>
-    <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" href="#" th:href="@{/products}"> MotoProducts </a>
 </div>
+
+    <header class="p-3 text-bg-dark d-flex justify-content-center py-3">
+
+        <form sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" th:action="@{user-panel}" th:method="get">
+            <button class="btn btn-outline-light me-3" type="submit">User panel</button>
+        </form>
+        <form sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" th:action="@{products}" th:method="get">
+            <button class="btn btn-outline-light me-3" type="submit">MotoProducts</button>
+        </form>
+        <form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{admin}" th:method="get">
+            <button class="btn btn-outline-light me-3" type="submit">Administrator panel</button>
+        </form>
+
+    </header>
+<!--    <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" href="#" th:href="@{/user-panel}"> User panel </a>-->
+<!--    &nbsp;&nbsp;-->
+<!--    <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" th:href="@{/admin}"> Administrator panel </a>-->
+<!--    <br>-->
+<!--    <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" href="#" th:href="@{/products}"> MotoProducts </a>-->
 </body>
 </html>
