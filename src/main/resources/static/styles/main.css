@@ -1,8 +1,8 @@
-.container {
-    margin: auto;
-    max-width: 1300px;
-    text-align: center;
-}
+/*.container {*/
+/*    margin: auto;*/
+/*    !*text-align: center;*!*/
+/*    align-items: center;*/
+/*}*/
 .products-container {
     text-align: center;
     align-items: center;
@@ -87,4 +87,7 @@
 }
 .no-resize {
     resize: none;
+}
+.small-margin {
+    margin: 3px;
 }
