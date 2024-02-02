@@ -91,3 +91,21 @@
 .small-margin {
     margin: 3px;
 }
+.bg {
+    /* The image used */
+    /*background-image: url('../static/images/theme-2.png');*/
+    background-image:url(../images/theme-2.jpg);
+    background-color: black;
+
+
+
+    /* Full height */
+    height: 100%;
+    margin: 0;
+    /*width: 100%;*/
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

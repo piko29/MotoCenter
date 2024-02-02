@@ -9,17 +9,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body>
-<header class="p-3 text-bg-dark d-flex justify-content-center py-2">
-    <form th:action="@{/}" th:method="get" class="item-left">
-        <button class="btn btn-outline-light me-3" type="submit">Back to Main Page</button>
-    </form>
-</header>
-<div class="container">
-    <img src="../static/images/MotoCenter.png" th:src="@{/images/MotoCenter.png}" alt="logo"
-         class="full-image">
-    <h1 class="header" style="font-family:fantasy">Register</h1>
-    <i class="fa-solid fa-lock fa-3x"></i>
+<body class="bg">
+
+<!--<header class="p-3 text-bg-dark d-flex justify-content-center py-2">-->
+<!--    <form th:action="@{/}" th:method="get" class="item-left">-->
+<!--        <button class="btn btn-outline-light me-3" type="submit">Back to Main Page</button>-->
+<!--    </form>-->
+<!--</header>-->
+
+<div class="container text-center d-flex flex-column justify-content-center min-vh-100">
+<!--    <img src="../static/images/MotoCenter.png" th:src="@{/images/MotoCenter.png}" alt="logo"-->
+<!--         class="full-image">-->
+    <h1 class="header text-white" style="font-weight: bolder">Register</h1>
+    <i class="fa-solid fa-user-lock fa-4x text-white"></i>
     <form class="custom-form-floating" th:action="@{/register}" method="post" th:object="${user}">
         <div class="form-floating custom-form-floating">
             <input type="email" th:field="*{email}" class="form-control"  id="floatingEmail2" placeholder="Email" >
@@ -41,42 +43,13 @@
             <label for="floatingName3">Last Name</label>
         </div>
 <!--        <input th:field="*{lastName}" placeholder="last name" class="form-item">-->
-        <button type="submit" class="btn btn-primary w-100 py-3 custom-form-floating">Register</button>
+        <button type="submit" class="btn btn-secondary w-100 py-3 custom-form-floating"
+        style="font-weight: bolder">Register</button>
     </form>
-<!--    <form class="custom-form-floating" th:action="@{/user-panel/add}" method="post" th:object="${motoProduct}"-->
-<!--          enctype="multipart/form-data">-->
-<!--        -->
-<!--        <input  type="file" name="img" accept="image/*" class="btn btn-secondary w-100 form-floating">-->
-<!--        &lt;!&ndash;        <input th:field="*{title}" placeholder="title" class="form-item">&ndash;&gt;-->
-<!--        <div class="form-floating custom-form-floating">-->
-<!--            <input th:field="*{title}" class="form-control" id="floatingTitle1" placeholder="title" >-->
-<!--            <label for="floatingTitle1">Title</label>-->
-<!--        </div>-->
-<!--        &lt;!&ndash;        <input th:field="*{description}" placeholder="description" class="form-item">&ndash;&gt;-->
-<!--        &lt;!&ndash;        <div class="form-floating custom-form-floating">&ndash;&gt;-->
-<!--        <label for="floatingDescription1" class="item-left">Description</label>-->
-<!--        <textarea th:field="*{description}" class="form-control no-resize" rows="3"-->
-<!--                  id="floatingDescription1" placeholder="Write description here" >-->
-<!--            </textarea>-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        <div class="form-floating custom-form-floating">-->
-<!--            <input type="text" th:field="*{description}" class="form-control"  id="floatingDescription2" placeholder="description" >-->
-<!--            <label for="floatingDescription2">Description</label>-->
-<!--        </div>-->
-<!--        &lt;!&ndash;        <input th:field="*{contactInfo}" placeholder="contact info" class="form-item">&ndash;&gt;-->
-<!--        <div class="form-floating custom-form-floating">-->
-<!--            <input type="text" th:field="*{contactInfo}" class="form-control" id="floatingContact1" placeholder="contact" >-->
-<!--            <label for="floatingContact1">Contact info</label>-->
-<!--        </div>-->
-<!--        &lt;!&ndash;        <input th:field="*{price}" placeholder="price" class="form-item">&ndash;&gt;-->
-<!--        <div class="form-floating custom-form-floating">-->
-<!--            <input type="number" th:field="*{price}" class="form-control" id="floatingPrice1" placeholder="price PLN" >-->
-<!--            <label for="floatingPrice1">Price PLN</label>-->
-<!--        </div>-->
-<!--        <button type="submit" class="btn btn-primary w-100 py-3 custom-form-floating">Add MotoProduct</button>-->
-<!--    </form>-->
-    <p>
-        Already have an account? <a class="nav-item" href="#" th:href="@{/login}">Log in.</a>
+
+    <p class="text-white small-margin" style="font-weight: bold">
+        Already have an account?
+        <a class="nav-item text-bg-danger" style="font-weight: bold" href="#" th:href="@{/login}">Log in</a>
     </p>
 </div>
 </body>

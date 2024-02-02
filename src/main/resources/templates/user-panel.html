@@ -9,8 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body class="bg-dark">
-<header class="p-3 text-bg-dark d-flex justify-content-center py-2">
+<body class="bg-black">
+<header class="p-3 text-bg-black d-flex justify-content-center py-2">
     <form th:action="@{/}" th:method="get" class="item-left">
         <button class="btn btn-outline-light me-3" type="submit">Back to Main Page</button>
     </form>
@@ -28,31 +28,32 @@
 <!--       href="#" th:href="@{/logout}">Log out</a>-->
 <!--</div>-->
 <br>
-<h1 class="text-bg-dark d-flex justify-content-center" th:text="'Hello ' + ${#authentication.name}">Hello!</h1>
+<h1 class="text-center" style="font-weight: bolder;font-style: oblique;color: red"
+    th:text="'Hello ' + ${#authentication.name}">Hello!</h1>
 <!--<h2>Change password</h2>-->
 <!--<form th:action="@{/change-password}" method="post">-->
 <!--    <input type="password" name="newPassword" placeholder="New password">-->
 <!--    <button type="submit">Change</button>-->
 <!--</form>-->
-<div class="text-bg-dark text-center justify-content-center">
+<div class="text-bg-black text-center justify-content-center">
     <br>
     <form th:action="@{user-panel/change-password}" th:method="get">
-        <button class="btn btn-outline-info btn-lg btn-block small-margin w-75" type="submit">Change password</button>
+        <button class="btn btn-outline-light btn-lg btn-block small-margin w-75" type="submit">Change password</button>
     </form>
     <form th:action="@{user-panel/user-products}" th:method="get">
-        <button class="btn btn-outline-info btn-lg btn-block small-margin w-75" type="submit">Owned products</button>
+        <button class="btn btn-outline-light btn-lg btn-block small-margin w-75" type="submit">Owned products</button>
     </form>
     <form th:action="@{user-panel/add}" th:method="get">
-        <button class="btn btn-outline-info btn-lg btn-block small-margin w-75" type="submit">Add MotoProduct</button>
+        <button class="btn btn-outline-light btn-lg btn-block small-margin w-75" type="submit">Add MotoProduct</button>
     </form>
     <form th:action="@{user-panel/user-messages}" th:method="get">
-        <button class="btn btn-outline-info btn-lg btn-block small-margin w-75" type="submit">Check messages</button>
+        <button class="btn btn-outline-light btn-lg btn-block small-margin w-75" type="submit">Check messages</button>
     </form>
     <form th:action="@{user-panel/sold-products}" th:method="get">
-        <button class="btn btn-outline-info btn-lg btn-block small-margin w-75" type="submit">Sold products</button>
+        <button class="btn btn-outline-light btn-lg btn-block small-margin w-75" type="submit">Sold products</button>
     </form>
     <form th:action="@{user-panel/bought-products}" th:method="get">
-        <button class="btn btn-outline-info btn-lg btn-block small-margin w-75" type="submit">Bought products</button>
+        <button class="btn btn-outline-light btn-lg btn-block small-margin w-75" type="submit">Bought products</button>
     </form>
 <!--    <h2>Users list</h2>-->
 <!--    <ul>-->
