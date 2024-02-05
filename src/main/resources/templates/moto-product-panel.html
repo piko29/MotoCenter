@@ -17,16 +17,6 @@
                 th:text="|Log out ${#authentication.name}|" type="submit">Log out</button>
     </form>
 </header>
-<!--<div class="item-left">-->
-<!--    <a href="#" th:href="@{/}">Go back to homepage</a>-->
-<!--</div>-->
-<!--<div class="item-right">-->
-<!--    <a sec:authorize="isAuthenticated()"-->
-<!--       th:text="|Log out ${#authentication.name}|"-->
-<!--       href="#" th:href="@{/logout}">Log out</a>-->
-<!--</div>-->
-<!--<br>-->
-<!--<div class="container">-->
 
 <div class="container">
     <h1 class="text-center" style="font-weight: bolder;font-style: oblique; color: red">MotoProducts</h1>
@@ -40,7 +30,7 @@
                          alt="Product image"
                          th:src="@{${'/images/'+motoProduct.image}}" >
                 </div>
-                <div class="card-body col-8 ">
+                <div class="card-body col-8">
                     <h4  class="text-start " th:text="${motoProduct.title}">example_product</h4>
                     <h4 style="font-weight: bold" class="text-start" th:text="${motoProduct.price + ' PLN'}">example_price</h4>
 
@@ -64,69 +54,5 @@
             </div>
         </li>
     </ul>
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="row justify-content-center mb-3">-->
-<!--    <div class="col-md-12">-->
-<!--        <div class="card shadow-0 border rounded-3">-->
-<!--            <div class="card-body">-->
-<!--                <div class="row g-0">-->
-<!--                    <div class="col-xl-3 col-md-4 d-flex justify-content-center">-->
-<!--                        <div class="bg-image hover-zoom ripple rounded ripple-surface me-md-3 mb-3 mb-md-0">-->
-<!--                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp" class="w-100" />-->
-<!--                            <a href="#!">-->
-<!--                                <div class="hover-overlay">-->
-<!--                                    <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-xl-6 col-md-5 col-sm-7">-->
-<!--                        <h5>Rucksack Backpack Jeans</h5>-->
-
-
-<!--                        <p class="text mb-4 mb-md-0">-->
-<!--                            Short description about the product goes here, for ex its features. Lorem ipsum dolor sit amet with hapti you enter into any new area of science, you almost lorem ipsum is great text-->
-<!--                            consectetur adipisicing-->
-<!--                        </p>-->
-<!--                    </div>-->
-<!--                    <div class="col-xl-3 col-md-3 col-sm-5">-->
-<!--                        <div class="d-flex flex-row align-items-center mb-1">-->
-<!--                            <h4 class="mb-1 me-1">$34,50</h4>-->
-<!--                            <span class="text-danger"><s>$49.99</s></span>-->
-<!--                        </div>-->
-<!--                        <h6 class="text-success">Free shipping</h6>-->
-<!--                        <div class="mt-4">-->
-<!--                            <button class="btn btn-primary shadow-0" type="button">Buy this</button>-->
-<!--                            <a href="#!" class="btn btn-light border px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg px-1"></i></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--paginacja-->
-<!--<nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">-->
-<!--    <ul class="pagination">-->
-<!--        <li class="page-item disabled">-->
-<!--            <a class="page-link" href="#" aria-label="Previous">-->
-<!--                <span aria-hidden="true">&laquo;</span>-->
-<!--            </a>-->
-<!--        </li>-->
-<!--        <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
-<!--        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
-<!--        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-<!--        <li class="page-item"><a class="page-link" href="#">4</a></li>-->
-<!--        <li class="page-item"><a class="page-link" href="#">5</a></li>-->
-<!--        <li class="page-item">-->
-<!--            <a class="page-link" href="#" aria-label="Next">-->
-<!--                <span aria-hidden="true">&raquo;</span>-->
-<!--            </a>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</nav>-->
 </body>
 </html>

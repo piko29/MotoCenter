@@ -17,15 +17,7 @@
                 th:text="|Log out ${#authentication.name}|" type="submit">Log out</button>
     </form>
 </header>
-<!--<div class="item-left">-->
-<!--    <a href="#" th:href="@{/products}">Go back to products</a>-->
-<!--</div>-->
-<!--<div class="item-right">-->
-<!--    <a sec:authorize="isAuthenticated()"-->
-<!--       th:text="|Log out ${#authentication.name}|"-->
-<!--       href="#" th:href="@{/logout}">Log out</a>-->
-<!--</div>-->
-<!--<br>-->
+
 <div class="container">
     <h1 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">MotoProduct Details</h1>
 </div>
@@ -35,18 +27,16 @@
     style="list-style: none">
         <li th:each="motoProduct: ${motoDetails}">
             <img class="img-fluid border border-black align-content-center custom-form-floating"
-                 alt="Product image" th:src="@{${'/images/'+motoProduct.image}}" width="800">
+                 alt="Product image" th:src="@{${'/images/'+motoProduct.image}}">
             <br>
             <span style="font-weight: bold" th:text="${'Title: ' + motoProduct.title}">example_title</span>
             <br>
-            <span th:text="${'Description: ' + motoProduct.description}">example_description</span>
-            <br>
             <span style="font-weight: bolder" th:text="${'Price: ' + motoProduct.price +' PLN'}">example_price</span>
+            <br>
+            <span th:text="${'Description: ' + motoProduct.description}">example_description</span>
             <br>
             <span th:text="${'Contact info: ' + motoProduct.contactInfo}">example_contact</span>
             <br>
-<!--            <span th:text="${'Owner id: ' + motoProduct.user.getId()}">example_id</span>-->
-<!--            <br>-->
             <span th:text="${'Owner: ' + motoProduct.user.getEmail()}">example_owner</span>
             <br>
             <form th:unless="${motoProduct.getOwner()}==${#authentication.name}"

@@ -23,7 +23,6 @@
 </div>
 
     <header class="p-3 text-bg-black d-flex justify-content-center py-3">
-
         <form sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" th:action="@{user-panel}" th:method="get">
             <button class="btn btn-outline-light me-3 btn-lg" type="submit">User panel</button>
         </form>
@@ -33,12 +32,6 @@
         <form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{admin}" th:method="get">
             <button class="btn btn-outline-light me-3 btn-lg" type="submit">Administrator panel</button>
         </form>
-
     </header>
-<!--    <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" href="#" th:href="@{/user-panel}"> User panel </a>-->
-<!--    &nbsp;&nbsp;-->
-<!--    <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" th:href="@{/admin}"> Administrator panel </a>-->
-<!--    <br>-->
-<!--    <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')" href="#" th:href="@{/products}"> MotoProducts </a>-->
 </body>
 </html>
