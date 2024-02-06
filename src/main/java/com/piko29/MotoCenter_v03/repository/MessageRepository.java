@@ -13,5 +13,4 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     Optional<Message> findMessageBySender(User sender);
     List<Message> findMessagesBySender(User sender);
 
-
 }

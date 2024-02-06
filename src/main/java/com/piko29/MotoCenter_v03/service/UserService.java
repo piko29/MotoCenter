@@ -227,6 +227,7 @@ public class UserService {
                 .stream()
                 .map(messageDtoMapper::map)
                 .toList();
+
         List<MessageDto> sent = messageRepository.findMessagesBySender
                         (userRepository.findByEmail(getNameFromContextHolder()).orElseThrow())
                 .stream()
@@ -237,6 +238,20 @@ public class UserService {
         return Stream.concat(received.stream(),sent.stream()).sorted(Comparator.comparing(MessageDto::getMessageId))
                 .collect(Collectors.toList());
 
+    }
+    //06.02
+    @Transactional
+    public void deleteChatWithUser(String email){
+        List<Message> received = messageRepository.findMessagesBySender
+                (userRepository.findByEmail(email).orElseThrow()).stream().toList();
+
+        List<Message> sent = messageRepository.findMessagesBySender
+                (userRepository.findByEmail(getNameFromContextHolder()).orElseThrow()).stream()
+                .filter(message -> message.getUser().getEmail().equals(email)).toList();
+
+        List<Message> all=Stream.concat(received.stream(),sent.stream()).toList();
+
+    messageRepository.deleteAll(all);
     }
 
     public List<MotoProductDto> getSoldProductsByUsername(String username) {

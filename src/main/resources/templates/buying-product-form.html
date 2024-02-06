@@ -35,14 +35,19 @@
 <!--    <textarea class="message-box" rows="6" th:field="*{content}" placeholder="Write details about delivery and payment"></textarea>-->
 <!--    <button type="submit" class="big-button">Send message</button>-->
 <!--</form>-->
+<!--th:action="@{'/products/{id}/message'(id=${motoProduct.id})}"-->
+
 
 <div class="card-body border rounded-4 container text-center d-flex flex-column justify-content-center bg-dark-subtle">
-    <form class="form-floating custom-form-floating" th:action="@{'/products/{id}/message'(id=${motoProduct.id})}" method="post" th:object="${messageDto}">
+    <form class="form-floating custom-form-floating" th:action="@{'/products/{id}/buy'(id=${motoProduct.id})}"
+          method="post" th:object="${messageDto}">
         <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Title: ' + motoProduct.title}">Title: </span>
         <br>
         <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Owner: ' + motoProduct.user.getEmail()}">Owner: </span>
         <br>
-        <textarea style="margin-top: 10px" class="message-box" rows="6" th:field="*{content}" placeholder="Write details about delivery and payment"></textarea>
+        <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Product Id: ' + motoProduct.id}">example_id</span>
+        <br>
+        <textarea style="margin-bottom: 10px" class="message-box" rows="6" th:field="*{content}" placeholder="Write details about delivery and payment"></textarea>
         <br>
         <div class="form-floating custom-form-floating">
             <br>
@@ -51,6 +56,7 @@
         </div>
     </form>
 </div>
+
 
 
 </body>

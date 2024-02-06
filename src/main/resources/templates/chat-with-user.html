@@ -9,8 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body>
-<header class="p-3 text-bg-dark d-flex justify-content-center py-2">
+<body class="bg-black">
+<header class="p-3 text-bg-black d-flex justify-content-center py-2">
     <form th:action="@{/user-panel/user-messages}" th:method="get" class="item-left">
         <button class="btn btn-outline-light me-3" type="submit">Back to User Messages</button>
     </form>
@@ -19,34 +19,56 @@
                 th:text="|Log out ${#authentication.name}|" type="submit">Log out</button>
     </form>
 </header>
-<!--<div class="item-left">-->
-<!--    <a href="#" th:href="@{/user-panel/user-messages}">Go back to messages</a>-->
-<!--</div>-->
-<!--<div class="item-right">-->
-<!--    <a sec:authorize="isAuthenticated()"-->
-<!--       th:text="|Log out ${#authentication.name}|"-->
-<!--       href="#" th:href="@{/logout}">Log out</a>-->
-<!--</div>-->
-<div class="container">
-    <h2>Chat</h2>
-    <ul>
-        <li class="element-frame" th:each="message: ${messagesFromOneUser}">
+
+<div class="container text-center d-flex flex-column justify-content-center w-50" >
+    <h2 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">Chat</h2>
+<!--    th:text="|Chat with ${email}|"-->
+    <ul class="text-start row" >
+        <li th:unless="${message.getSender() == #authentication.name}"
+                class="element-frame rounded-2" th:each="message: ${messagesFromOneUser}"
+            style="font-weight: bold;font-style: oblique;color: red">
             <span th:text="${'Message Id: ' + message.getMessageId()}">example_id</span>
+            <br>
+            <span th:text="${'Product Id: ' + message.getProductId()}">example_id</span>
             <br>
             <span th:text="${'Title: ' + message.getTitle()}">example_title</span>
             <br>
-            <span th:text="${'Content:' + message.getContent()}">example_content</span>
+            <span style="word-wrap: break-word" th:text="${'Content: ' + message.getContent()}">example_content</span>
             <br>
             <span th:text="${'Sender: ' + message.getSender()}">example_sender</span>
             <br>
             <form th:action="@{'{email}/{id}/delete'(email=${message.getSender()},
             id=${message.getMessageId()})}" th:method="get">
-                <button class="small-button" type="submit">Delete</button>
+                <button class="btn btn-outline-danger w-100 py-3 custom-form-floating" type="submit">Delete</button>
             </form>
             <form th:unless="${message.getSender() == #authentication.name}"
                   th:action="@{'{email}/{id}/answer'(email=${message.getSender()},
             id=${message.getMessageId()})}" th:method="get">
-                <button class="small-button" type="submit">Answer</button>
+                <button class="btn btn-outline-primary w-100 py-3 custom-form-floating" type="submit">Answer</button>
+            </form>
+        </li>
+    </ul>
+    <ul class="text-end row">
+        <li th:if="${message.getSender() == #authentication.name}"
+            class="element-frame rounded-2" th:each="message: ${messagesFromOneUser}"
+            style="font-weight: bold;font-style: oblique;color: blue">
+            <span th:text="${'Message Id: ' + message.getMessageId()}">example_id</span>
+            <br>
+            <span th:text="${'Product Id: ' + message.getProductId()}">example_id</span>
+            <br>
+            <span th:text="${'Title: ' + message.getTitle()}">example_title</span>
+            <br>
+            <span style="word-wrap: break-word" th:text="${'Content: ' + message.getContent()}">example_content</span>
+            <br>
+            <span th:text="${'Sender: ' + message.getSender()}">example_sender</span>
+            <br>
+            <form th:action="@{'{email}/{id}/delete'(email=${message.getSender()},
+            id=${message.getMessageId()})}" th:method="get">
+                <button class="btn btn-outline-danger w-100 py-3 custom-form-floating" type="submit">Delete</button>
+            </form>
+            <form th:action="@{'{email}/{id}/answer'(email=${message.getSender()},id=${message.getMessageId()})}" th:method="get">
+                <button class="btn btn-outline-primary w-100 py-3 custom-form-floating" type="submit"
+                >Write another message</button>
             </form>
         </li>
     </ul>

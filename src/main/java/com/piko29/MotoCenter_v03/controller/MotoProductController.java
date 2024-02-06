@@ -51,7 +51,7 @@ public class MotoProductController {
 
     @GetMapping("/{id}/buy")
     String buyMotoProductForm(@PathVariable Long id,Message messageDto, Model model){
-        motoProductService.buyMotoProduct(id);
+//        motoProductService.buyMotoProduct(id);
         MotoProduct motoProduct = motoProductService.findMotoProduct(id);
         model.addAttribute("motoProduct", motoProduct);
         model.addAttribute("messageDto", messageDto);
@@ -59,6 +59,7 @@ public class MotoProductController {
     }
     @PostMapping("/{id}/buy")
     String buyMotoProductMessage(@PathVariable Long id, Message messageDto){
+        motoProductService.buyMotoProduct(id);
         motoProductService.sendBuyingMessage(messageDto,id);
         return "redirect:/products";
     }

@@ -14,6 +14,7 @@ public class Message {
     private Long productId;
     private String title;
     private String content;
+
     @ManyToOne
     private User sender;
     @ManyToOne

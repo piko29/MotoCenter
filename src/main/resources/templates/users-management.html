@@ -8,8 +8,8 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<body>
-<header class="p-3 text-bg-dark d-flex justify-content-center py-2">
+<body class="bg-black">
+<header class="p-3 text-bg-black d-flex justify-content-center py-2">
     <form th:action="@{/admin}" th:method="get" class="item-left">
         <button class="btn btn-outline-light me-3" type="submit">Back to Admin Panel</button>
     </form>
@@ -18,24 +18,19 @@
                 th:text="|Log out ${#authentication.name}|" type="submit">Log out</button>
     </form>
 </header>
-<!--    <div class="item-left">-->
-<!--        <a href="#" th:href="@{/}">Go back to homepage</a>-->
-<!--    </div>-->
-<!--    <div class="item-right">-->
-<!--        <a sec:authorize="isAuthenticated()"-->
-<!--           th:text="|Log out ${#authentication.name}|"-->
-<!--           href="#" th:href="@{/logout}">Log out</a>-->
-<!--    </div>-->
-<!--    <br>-->
+
 <div class="container">
-    <h1 class="header" style="font-family:fantasy">Administrator panel</h1>
-    <h2>Users list</h2>
-    <ul>
-        <li class="element-frame" th:each="email: ${userEmails}">
+    <h1 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">Administrator panel</h1>
+    <h2 class="text-center" style="font-weight: bold;font-style: oblique;color: red">Users list</h2>
+</div>
+    <ul class="container text-center" style="list-style: none">
+        <li class="element-frame rounded-2" style="font-weight: bold;color: red"
+            th:each="email: ${userEmails}">
             <span th:text="${email}">example@email.com</span>
-            <a href="#" th:href="@{/admin/delete-user(email=${email})}">Delete</a>
+            <a href="#" th:href="@{/admin/delete-user(email=${email})}"
+               onclick="return confirm('Are you sure you want to buy this user?')">Delete</a>
         </li>
     </ul>
-</div>
+
 </body>
 </html>

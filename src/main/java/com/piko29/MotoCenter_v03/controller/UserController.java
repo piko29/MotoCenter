@@ -108,6 +108,9 @@ public class UserController {
         Set<String> allSenders = userService.getMessageSenders();
         model.addAttribute("sender", allSenders);
 
+        List<String> allUserEmails = userService.findAllUserEmails();
+        model.addAttribute("userEmails", allUserEmails);
+
         return "user-messages";
     }
     @GetMapping("/user-messages/{email}")
@@ -116,6 +119,17 @@ public class UserController {
         model.addAttribute("messagesFromOneUser", messagesFromOneUser);
         return "chat-with-user";
     }
+    //06.02
+    @GetMapping("/user-messages/{email}/delete")
+    String deleteChat(@PathVariable String email){
+        userService.deleteChatWithUser(email);
+        return "redirect:/user-panel/user-messages";
+    }
+//maybe later for direct chat without specific topic
+//    @GetMapping("user-messages/{email}/send")
+//    String writeMessage(@PathVariable String email){
+//        return "answer-message-form";
+//    }
 
     //05.01
     @GetMapping("/user-messages/{email}/{id}/delete")

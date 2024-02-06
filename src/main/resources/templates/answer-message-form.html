@@ -43,7 +43,9 @@
         <br>
         <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Owner: ' + messageDto.user.getEmail()}">Owner: </span>
         <br>
-        <textarea style="margin-top: 10px" class="message-box" rows="6" th:field="*{content}" placeholder="Text of message"></textarea>
+        <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Product Id: ' + messageDto.getProductId()}">example_id</span>
+        <br>
+        <textarea style="margin-bottom: 10px" class="message-box" rows="6" th:field="*{content}" placeholder="Text of message"></textarea>
         <br>
         <div class="form-floating custom-form-floating">
             <br>

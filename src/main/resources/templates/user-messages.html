@@ -9,8 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body>
-<header class="p-3 text-bg-dark d-flex justify-content-center py-2">
+<body class="bg-black">
+<header class="p-3 text-bg-black d-flex justify-content-center py-2">
     <form th:action="@{/user-panel}" th:method="get" class="item-left">
         <button class="btn btn-outline-light me-3" type="submit">Back to User Panel</button>
     </form>
@@ -19,26 +19,46 @@
                 th:text="|Log out ${#authentication.name}|" type="submit">Log out</button>
     </form>
 </header>
-<!--<div class="item-left">-->
-<!--    <a href="#" th:href="@{/user-panel}">Go back to user-panel</a>-->
-<!--</div>-->
-<!--<div class="item-right">-->
-<!--    <a sec:authorize="isAuthenticated()"-->
-<!--       th:text="|Log out ${#authentication.name}|"-->
-<!--       href="#" th:href="@{/logout}">Log out</a>-->
-<!--</div>-->
+
 <div class="container">
-    <h2>Private messages</h2>
-    <ul>
-        <li class="element-frame" th:each="sender: ${sender}">
-            <span th:text="${'You have message from: ' + sender}">sender email</span>
+    <h2 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">Received private messages</h2>
+    <ul class="text-start row">
+        <li th:unless="${sender == #authentication.name}" class="element-frame rounded-2" style="font-weight: bold;
+        font-style: oblique;color: red" th:each="sender: ${sender}">
+            <span th:text="${'You have messages from: ' + sender}">sender email</span>
             <br>
             <form th:action="@{'user-messages/{email}'(email=${sender})}" th:method="get">
-                <button class="small-button" type="submit">Chat with User</button>
+                <button class="btn btn-outline-primary w-100 py-3 custom-form-floating" type="submit">Chat with User</button>
             </form>
-
+            <form th:action="@{'user-messages/{email}/delete'(email=${sender})}" th:method="get">
+                <button class="btn btn-outline-danger w-100 py-3 custom-form-floating" type="submit">Delete Chat</button>
+            </form>
         </li>
     </ul>
+    <h2 th:if="${sender == #authentication.name}" class="text-center" style="font-weight: bolder;font-style: oblique;
+    color: red">Your messages without answer</h2>
+    <ul class="text-start row">
+        <li th:if="${sender == #authentication.name}" class="element-frame rounded-2" style="font-weight: bold;
+        font-style: oblique;color: red" th:each="sender: ${sender}">
+            <span th:text="${'Your single messages'}">sender email</span>
+            <br>
+            <form th:action="@{'user-messages/{email}'(email=${sender})}" th:method="get">
+                <button class="btn btn-outline-primary w-100 py-3 custom-form-floating" type="submit">Check messages</button>
+            </form>
+            <form th:action="@{'user-messages/{email}/delete'(email=${sender})}" th:method="get">
+                <button class="btn btn-outline-danger w-100 py-3 custom-form-floating" type="submit">Delete Chat</button>
+            </form>
+        </li>
+    </ul>
+<!--    <h2 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">Write direct message</h2>-->
+<!--    <ul class="container text-center" style="list-style: none">-->
+<!--        <li class="element-frame rounded-2" style="font-weight: bold;color: red"-->
+<!--            th:each="email: ${userEmails}">-->
+<!--            <span th:text="${email}">example@email.com</span>-->
+<!--            <a href="#" th:href="@{/admin/delete-user(email=${email})}"-->
+<!--               onclick="return confirm('Are you sure you want write message this user?')">Write</a>-->
+<!--        </li>-->
+<!--    </ul>-->
 </div>
 </body>
 </html>

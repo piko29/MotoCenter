@@ -23,10 +23,12 @@
 }
 
 .item-left {
+    text-align: start;
     float: left;
     margin: auto;
 }
 .item-right {
+    text-align: end;
     float: right;
     margin: auto;
 }

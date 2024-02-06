@@ -43,6 +43,10 @@
                     <button class="btn btn-outline-danger small-margin align-content-start" type="submit"
                             style="font-weight: bold">Details of MotoProduct</button>
                 </form>
+                <form th:action="@{'user-messages/{email}'(email=${motoProduct.getOwner()})}" th:method="get">
+                    <button class="btn btn-outline-danger small-margin align-content-start"
+                            style="font-weight: bold" type="submit">Chat with User</button>
+                </form>
             </div>
         </div>
     </li>
