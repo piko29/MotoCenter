@@ -6,15 +6,15 @@
 .products-container {
     text-align: center;
     align-items: center;
-    max-width: 1500px;
+    /*max-width: 1500px;*/
     display: flex;
 }
 
 .message-box {
     width: 80%;
-    height: 80%;
+    /*height: 80%;*/
     align-items: center;
-    padding: 22px 20px;
+    padding: 20px 20px;
     box-sizing: border-box;
     border: 2px solid;
     border-radius: 4px;
@@ -79,10 +79,11 @@
 }
 .element-frame {
     border: 2px solid;
-    margin: 5px;
+    margin: 5px 5px 5px 5px;
     padding: 10px;
     display: inline-block;
-    align-items: center;
+    color: red;
+    /*align-items: center;*/
 }
 .custom-form-floating {
     margin-top: 10px;
@@ -91,7 +92,7 @@
     resize: none;
 }
 .small-margin {
-    margin: 3px;
+    margin: 2px 2px 2px 2px;
 }
 .bg {
     /* The image used */
@@ -110,4 +111,30 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+.user2-message {
+    background-color: darkgrey ;
+    list-style: none;
+    border: red solid;
+    font-weight: bold;
+    font-style: oblique;
+    color: black;
+    /*margin-top: 20px;*/
+    /*margin-bottom: 20px;*/
+    margin: 20px auto 20px 0;
+
+
+}
+.user1-message {
+    background-color: whitesmoke ;
+    list-style: none;
+    border: blue solid;
+    font-weight: bold;
+    font-style: oblique;
+    color: black;
+    /*float: right;*/
+    /*text-align: right;*/
+    margin: 20px 0 20px auto;
+
+
 }

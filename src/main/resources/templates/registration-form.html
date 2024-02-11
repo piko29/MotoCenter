@@ -22,7 +22,7 @@
 <!--         class="full-image">-->
     <h1 class="header text-white" style="font-weight: bolder">Register</h1>
     <i class="fa-solid fa-user-lock fa-4x text-white"></i>
-    <form class="custom-form-floating" th:action="@{/register}" method="post" th:object="${user}">
+    <form class="custom-form-floating w-50 mx-auto" th:action="@{/register}" method="post" th:object="${user}">
         <div class="form-floating custom-form-floating">
             <input type="email" th:field="*{email}" class="form-control"  id="floatingEmail2" placeholder="Email" >
             <label for="floatingEmail2">Email</label>

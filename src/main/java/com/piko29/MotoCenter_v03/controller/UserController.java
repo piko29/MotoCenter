@@ -107,9 +107,20 @@ public class UserController {
     String userPanelMessages(Model model) {
         Set<String> allSenders = userService.getMessageSenders();
         model.addAttribute("sender", allSenders);
-
+        //07.02
+        Set<String> ownerMessages = userService.getMessageRecipients();
+        model.addAttribute("owner", ownerMessages);
+        //
+        //to tez chyba niepotrzebne userEmails
         List<String> allUserEmails = userService.findAllUserEmails();
         model.addAttribute("userEmails", allUserEmails);
+        //09.02
+
+        //12.02
+        Set<String> interactionEmails = userService.getMessageRecipientsAndSenders();
+        System.out.println(userService.getMessageRecipientsAndSenders());
+        model.addAttribute("interactionEmail", interactionEmails);
+
 
         return "user-messages";
     }
@@ -117,6 +128,10 @@ public class UserController {
     String chatWithUser(Model model, @PathVariable String email){
         List<MessageDto> messagesFromOneUser = userService.chatWithUser(email);
         model.addAttribute("messagesFromOneUser", messagesFromOneUser);
+        //07.02
+        List<MessageDto> singleMessages = userService.chatWithUser(email);
+        model.addAttribute("singleMessages", singleMessages);
+        //
         return "chat-with-user";
     }
     //06.02

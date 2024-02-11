@@ -9,21 +9,21 @@
 </head>
 
 <body class="bg-black">
-<header class="p-3 text-bg-black d-flex justify-content-center py-2">
+<header class="p-3 text-bg-black d-flex py-2">
     <form th:action="@{/admin}" th:method="get" class="item-left">
-        <button class="btn btn-outline-light me-3" type="submit">Back to Admin Panel</button>
+        <button class="btn btn-outline-light" type="submit">Back to Admin Panel</button>
     </form>
     <form class="item-right" th:action="@{/logout}" th:method="get">
-        <button class="btn btn-outline-warning me-3" sec:authorize="isAuthenticated()"
+        <button class="btn btn-outline-warning" sec:authorize="isAuthenticated()"
                 th:text="|Log out ${#authentication.name}|" type="submit">Log out</button>
     </form>
 </header>
 
-<div class="container">
+<div>
     <h1 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">Administrator panel</h1>
     <h2 class="text-center" style="font-weight: bold;font-style: oblique;color: red">Users list</h2>
 </div>
-    <ul class="container text-center" style="list-style: none">
+    <ul class="text-center" style="list-style: none">
         <li class="element-frame rounded-2" style="font-weight: bold;color: red"
             th:each="email: ${userEmails}">
             <span th:text="${email}">example@email.com</span>

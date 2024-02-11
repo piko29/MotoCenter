@@ -10,17 +10,17 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body class="bg-black">
-<header class="p-3 text-bg-black d-flex justify-content-center py-2">
+<header class="p-3 text-bg-black d-flex py-2">
     <form th:action="@{/user-panel/user-messages}" th:method="get" class="item-left">
-        <button class="btn btn-outline-light me-3" type="submit">Back to User Messages</button>
+        <button class="btn btn-outline-light" type="submit">Back to User Messages</button>
     </form>
     <form class="item-right" th:action="@{/logout}" th:method="get">
-        <button class="btn btn-outline-warning me-3" sec:authorize="isAuthenticated()"
+        <button class="btn btn-outline-warning" sec:authorize="isAuthenticated()"
                 th:text="|Log out ${#authentication.name}|" type="submit">Log out</button>
     </form>
 </header>
 
-<div class="container text-center">
+<div class="text-center">
     <h1 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">Send message</h1>
     <i class="fa-regular fa-envelope fa-4x" style="color: red"></i>
 </div>
@@ -36,8 +36,10 @@
 <!--</form>-->
 
 <br>
-<div class="card-body border rounded-4 container text-center d-flex flex-column justify-content-center bg-dark-subtle">
-    <form class="form-floating custom-form-floating" th:action="@{'/user-panel/user-messages/{email}/{id}/answer'(email=${messageDto.getSender().getEmail()},
+<div class="mx-auto rounded-4 text-center justify-content-center bg-dark-subtle w-75">
+<!--<div class="card-body border rounded-4 text-center d-flex flex-column justify-content-center bg-dark-subtle w-75">-->
+    <form th:unless="${messageDto.getSender().getEmail()==#authentication.name}" class="form-floating custom-form-floating "
+          th:action="@{'/user-panel/user-messages/{email}/{id}/answer'(email=${messageDto.getSender().getEmail()},
             id=${messageDto.getMessageId()})}" method="post" th:object="${message}">
         <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Title: ' + messageDto.getTitle()}">Title: </span>
         <br>
@@ -45,13 +47,31 @@
         <br>
         <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Product Id: ' + messageDto.getProductId()}">example_id</span>
         <br>
-        <textarea style="margin-bottom: 10px" class="message-box" rows="6" th:field="*{content}" placeholder="Text of message"></textarea>
+        <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Recipient: ' + messageDto.getSender().getEmail()}">Recipient: </span>
         <br>
-        <div class="form-floating custom-form-floating">
-            <br>
-            <button class="btn btn-outline-danger small-margin w-100 py-3 custom-form-floating"
-                    type="submit">Send message</button>
-        </div>
+        <textarea class="message-box" rows=6 th:field="*{content}" placeholder="Text of message"></textarea>
+<!--        <div class="form-floating custom-form-floating">-->
+        <button class="btn btn-outline-danger w-75 py-3 custom-form-floating border-3"
+                style="margin-bottom: 10px;font-weight: bold" type="submit">Send message</button>
+<!--        </div>-->
+    </form>
+
+    <form th:if="${messageDto.getSender().getEmail()==#authentication.name}" class="form-floating custom-form-floating "
+          th:action="@{'/user-panel/user-messages/{email}/{id}/answer'(email=${messageDto.getUser().getEmail()},
+            id=${messageDto.getMessageId()})}" method="post" th:object="${message}">
+        <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Title: ' + messageDto.getTitle()}">Title: </span>
+        <br>
+        <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Owner: ' + messageDto.user.getEmail()}">Owner: </span>
+        <br>
+        <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Product Id: ' + messageDto.getProductId()}">example_id</span>
+        <br>
+        <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Recipient: ' + messageDto.getUser().getEmail()}">Recipient: </span>
+        <br>
+        <textarea class="message-box" rows=6 th:field="*{content}" placeholder="Text of message"></textarea>
+        <!--        <div class="form-floating custom-form-floating">-->
+        <button class="btn btn-outline-danger w-75 py-3 custom-form-floating border-3"
+                style="margin-bottom: 10px;font-weight: bold" type="submit">Send message</button>
+        <!--        </div>-->
     </form>
 </div>
 

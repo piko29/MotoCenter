@@ -192,16 +192,30 @@ public class UserService {
         Message sourceMessage = messageRepository.findById(id).orElseThrow();
         Message message = new Message();
         User sender = userRepository.findByEmail(getNameFromContextHolder()).orElseThrow();
-        message.setSender(sender);
-        message.setProductId(sourceMessage.getProductId());
-        message.setTitle(sourceMessage.getTitle());
-        message.setUser(sourceMessage.getSender());
-        message.setContent(dto.getContent());
+        //12.02 kolejna wiadomosc na ten sam temat ode mnie
+        if(sourceMessage.getSender().getEmail().equals(getNameFromContextHolder())){
+        message.setUser(sourceMessage.getUser());
+            System.out.println("1:"+ sourceMessage.getUser());
+            message.setSender(sender);
+            message.setProductId(sourceMessage.getProductId());
+            message.setTitle(sourceMessage.getTitle());
+//            message.setUser(sourceMessage.getSender());//odbiorca
+            message.setContent(dto.getContent());
+        } else {
+            //12.02
+            message.setSender(sender);
+            message.setProductId(sourceMessage.getProductId());
+            message.setTitle(sourceMessage.getTitle());
+            message.setUser(sourceMessage.getSender());//odbiorca
+            System.out.println("2:????"+ sourceMessage.getSender());
+            message.setContent(dto.getContent());
+
+        }
 
         messageRepository.save(message);
     }
 
-    public List<MessageDto> getMessagesSentByOwner() {
+    public List<MessageDto> getMessagesSentByAccountOwner() {
         return messageRepository.findMessagesBySender
                         (userRepository.findByEmail(getNameFromContextHolder()).orElseThrow())
                 .stream()
@@ -212,7 +226,7 @@ public class UserService {
 
     public Set<String> getMessageSenders(){
         List<MessageDto> allReceivedMessages = getMessagesByUsername(getNameFromContextHolder());
-
+        //ci ktorzy mi wyslali
         Set<String> senders = allReceivedMessages.stream()
                 .map(MessageDto::getSender)
                 .collect(Collectors.toSet());
@@ -220,26 +234,89 @@ public class UserService {
         return senders;
 
     }
-    public List<MessageDto> chatWithUser(String email){
+    //07.02 zmiana nazwy z getownersinglemessages 12.02
+    public Set<String> getMessageRecipients(){
+        List<MessageDto> allSentMessages = getMessagesSentByAccountOwner();
+        //do ktorych ja wyslalem
+        Set<String> recipients = allSentMessages.stream()
+                .map(MessageDto::getRecipient)
+                .collect(Collectors.toSet());
 
+        return recipients;
+    }
+    //12.02 do obslugi interakcji przez wiadomosci z jednym uzytkownikiem
+    public Set<String> getMessageRecipientsAndSenders(){
+        List<MessageDto> allReceivedMessages = getMessagesByUsername(getNameFromContextHolder());
+        //ci ktorzy mi wyslali
+        Set<String> senders = allReceivedMessages.stream()
+                .map(MessageDto::getSender)
+                .collect(Collectors.toSet());
+
+        List<MessageDto> allSentMessages = getMessagesSentByAccountOwner();
+        //do ktorych ja wyslalem
+        Set<String> recipients = allSentMessages.stream()
+                .map(MessageDto::getRecipient)
+                .collect(Collectors.toSet());
+
+        Set<String> interactionWithUser = new HashSet<>(senders);
+        interactionWithUser.addAll(recipients);
+
+        return interactionWithUser;
+
+    }
+    //12.02
+
+    //zmiana 11.02 do odczytywania rowniez wyslanych wiadomosci
+
+    public List<MessageDto> chatWithUser(String email){
+        //gdzie dostalem wiadomosc od {email} i gdzie ja jestem odbiorca
         List<MessageDto> received = messageRepository.findMessagesBySender
                         (userRepository.findByEmail(email).orElseThrow())
                 .stream()
                 .map(messageDtoMapper::map)
+                .filter(messageDto -> messageDto.getRecipient().equals(getNameFromContextHolder()))
                 .toList();
-
+        //gdzie ja jestem wysylajacym i gdzie odbiorca to ten z {email}
         List<MessageDto> sent = messageRepository.findMessagesBySender
                         (userRepository.findByEmail(getNameFromContextHolder()).orElseThrow())
                 .stream()
                 .map(messageDtoMapper::map)
-                .filter(messageDto -> messageDto.getRecipient().equals(email))
+                .filter(messageDto -> messageDto.getRecipient().equals(email)
+                        || messageDto.getRecipient().equals(getNameFromContextHolder()))//tu byla zmiana
                 .toList();
 
         return Stream.concat(received.stream(),sent.stream()).sorted(Comparator.comparing(MessageDto::getMessageId))
                 .collect(Collectors.toList());
 
     }
-    //06.02
+    //07.02
+    public List<MessageDto> chatSingleMessages(String email){
+
+        //gdzie wysylajacym jestem ja i odbiorca inny niż z {email} ja
+        List<MessageDto> sent = messageRepository.findMessagesBySender
+                        (userRepository.findByEmail(getNameFromContextHolder()).orElseThrow())
+                .stream()
+                .map(messageDtoMapper::map)
+                .filter(messageDto -> !messageDto.getRecipient().equals(email))//odbiorca rozny niz ja {email}
+                .sorted(Comparator.comparing(MessageDto::getMessageId))
+                .toList();
+
+//        List<MessageDto> received = messageRepository.findMessagesByUser
+//                        (userRepository.findByEmail(email).orElseThrow())
+//                .stream()
+//                .map(messageDtoMapper::map)
+//                .filter(messageDto -> messageDto.getRecipient().equals(getNameFromContextHolder()))
+//                .toList();
+
+        return sent;
+
+    }
+    //
+    //09.02
+
+
+
+    //06.02 working fine
     @Transactional
     public void deleteChatWithUser(String email){
         List<Message> received = messageRepository.findMessagesBySender
