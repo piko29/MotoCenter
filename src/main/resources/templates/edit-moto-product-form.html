@@ -34,11 +34,16 @@
 <!--    </form>-->
     <form class="custom-form-floating" th:action="@{'/user-panel/user-products/{id}/edit'(id=${motoProduct.id})}"
           method="post" th:object="${motoProduct}" enctype="multipart/form-data">
+
         <label for="pictureLabel" class="item-left"
                style="font-weight: bolder;font-style: oblique;color: red">Change picture</label>
-        <input  type="file" name="img" accept="image/*" id="pictureLabel"
-                class="btn btn-secondary w-100 form-floating">
+<!--        <input  type="file" name="img" accept="image/*" id="pictureLabel"-->
+<!--                class="btn btn-secondary w-100 form-floating">-->
+
+        <input type="file" name="img" accept="image/*" id="pictureLabel"
+                class="btn btn-secondary w-100 form-floating" required>
         <!--        <input th:field="*{title}" placeholder="title" class="form-item">-->
+
         <div class="form-floating custom-form-floating">
             <input th:field="*{title}" class="form-control" id="floatingTitle1" placeholder="title" >
             <label for="floatingTitle1">New title</label>

@@ -31,9 +31,9 @@
                          th:src="@{${'/images/'+motoProduct.image}}" >
                 </div>
                 <div class="card-body col-8">
-                    <h4  class="text-start " th:text="${motoProduct.title}">example_product</h4>
+                    <h4 style="font-weight: bold" class="text-start " th:text="${motoProduct.title}">example_product</h4>
                     <h4 style="font-weight: bold" class="text-start" th:text="${motoProduct.price + ' PLN'}">example_price</h4>
-
+                    <h6 style="font-weight: bold" class="text-start" th:text="${'Seller: '+ motoProduct.owner}">example_seller</h6>
                     <form th:unless="${motoProduct.getOwner()}==${#authentication.name}"
                           th:action="@{'/products/{id}/message'(id=${motoProduct.id})}" th:method="get">
                         <button class="btn btn-outline-danger small-margin align-content-start" type="submit"

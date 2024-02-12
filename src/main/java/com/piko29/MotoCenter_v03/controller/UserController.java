@@ -80,7 +80,6 @@ public class UserController {
         StringBuilder fileNames = new StringBuilder();
         Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
         fileNames.append(file.getOriginalFilename());
-
         Files.write(fileNameAndPath, file.getBytes());
 
 //        model.addAttribute("msg", fileNames);
@@ -95,11 +94,20 @@ public class UserController {
     String editMotoProductForm(Model model,@PathVariable Long id){
         MotoProduct motoProduct = userService.findMotoProduct(id);
         model.addAttribute("motoProduct", motoProduct);
+        //12.02
+        System.out.println(motoProduct.getImage());
+        //
         return "edit-moto-product-form";
     }
     @PostMapping("/user-products/{id}/edit")
-    String editMotoProduct(MotoProductDto motoProductDto, @PathVariable Long id){
-        userService.editMotoProduct(motoProductDto,id);
+    String editMotoProduct(MotoProductDto motoProductDto, @PathVariable Long id, @RequestParam("img") MultipartFile file)
+        throws IOException {
+        StringBuilder fileNames = new StringBuilder();
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+        fileNames.append(file.getOriginalFilename());
+        Files.write(fileNameAndPath, file.getBytes());
+
+        userService.editMotoProduct(motoProductDto,id, file.getOriginalFilename());
         return "redirect:/user-panel/user-products";
     }
 

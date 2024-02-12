@@ -47,7 +47,11 @@
                 </form>
                 <form th:action="@{'user-messages/{email}'(email=${motoProduct.getOwner()})}" th:method="get">
                     <button class="btn btn-outline-danger small-margin align-content-start"
-                            style="font-weight: bold" type="submit">Chat with User</button>
+                            style="font-weight: bold" type="submit">Check Chat with User</button>
+                </form>
+                <form th:action="@{'/products/{id}/message'(id=${motoProduct.id})}" th:method="get">
+                    <button class="btn btn-outline-danger small-margin align-content-start" type="submit"
+                            style="font-weight: bold">Write another message about this product</button>
                 </form>
             </div>
         </div>

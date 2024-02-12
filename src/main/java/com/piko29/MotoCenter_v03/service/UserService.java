@@ -158,10 +158,14 @@ public class UserService {
 
         motoProductRepository.save(motoProduct);
     }
-
+//12.02 changing image
     @Transactional
-    public void editMotoProduct(MotoProductDto dto, Long id){
+    public void editMotoProduct(MotoProductDto dto, Long id, String fileName) throws IOException{
         MotoProduct motoProduct = motoProductRepository.findById(id).orElseThrow();
+        //12.02
+        motoProduct.setImage(fileName);
+//        motoProduct.setImage(dto.getImage());
+        System.out.println(dto.getImage());
         motoProduct.setTitle(dto.getTitle());
         motoProduct.setDescription(dto.getDescription());
         motoProduct.setPrice(dto.getPrice());
