@@ -45,7 +45,7 @@
             <br>
 
             <form th:if="${message.getSender() == #authentication.name}"
-                  th:action="@{'{email}/{id}/delete'(email=${message.getSender()},id=${message.getMessageId()})}"
+                  th:action="@{'{email}/{id}/delete'(email=${message.getRecipient()},id=${message.getMessageId()})}"
                   th:method="get">
                 <button class="btn btn-outline-danger w-100 py-3 border-5 custom-form-floating" type="submit"
                 style="font-weight: bold;color: black"
