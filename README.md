@@ -1,27 +1,52 @@
+<p align="left"> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="40" height="40"/> </a> <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> </p>
+
 # MotoCenter
-## Spring Boot Web Application based on Spring Security, Thymeleaf, H2 Database and much more. Java 21, Spring Boot 3.1.5
+This is a Java Spring Boot based Web Application composed of e-commerce, chat and other features. The main goal was to make place for selling, buying and having chat with seller, regarding motorcycles. Starting with login page I decided to make every feature only by myself, only from my ideas and my point of view, so I could learn as much as possible. It is hard to remember how many issues I had to face, but for sure I learned how to work independently and solve problems.<br><br>
+Quick overview from 12 February 2024 available at https://www.youtube.com/watch?v=SGgXvcOTVsY
 
-Applcation available at localhost:8080.
-H2 console available at localhost:8080/h2-console. Login "sa" password empty.
+# Table of Contents
+* [Technologies](#technologies)
+* [Features](#features)
+* [How to start](#how-to-start)
+* [Screenshots](#screenshots)
 
-Embedded users and passwords: 
-login: superadmin@example.com password: admin,
-login: jack@email.com password: dogcat,
-login: andrew@email.com password: super.
+# Technologies
+* Java 21
+* Spring Boot 3.1.5
+* Maven
+* H2 database
+* Spring Security 6
+* Thymeleaf
+* Bootstrap
+* Lombok
+* Spring Data JPA
+* HTML, CSS
+* SQL
+* IntelliJ IDEA
+  
+# Features
+* Login
+* Registration
+* Changing password
+* Deleting users (as admin - superadmin&#xfeff;@email.com)
+* Showing list of products
+* Showing a detailed view of specific product
+* Writing private messages
+* Chat with owner of the product
+* Adding and editing products(with pictures)
+* Buying and selling products
+* Showing list of bought and sold products
 
-### First stage completed: Implementation of login, registration, main page, user panel, admin panel, deleting users, changing password, h2 console, authorization, adding new user.
+All of this contained in a pleasant interface of the browser.
 
-![WeclomePage](https://github.com/piko29/MotoCenter/assets/124073777/0252ecb3-d085-447b-bbbd-b6aa7489c6cf)  ![UserFirst](https://github.com/piko29/MotoCenter/assets/124073777/7400813e-293d-40f0-aeb2-231dfc6a4544)
-![Registration](https://github.com/piko29/MotoCenter/assets/124073777/680b06ac-4b5d-4300-b91e-9905be58dad1)  ![LoginPage](https://github.com/piko29/MotoCenter/assets/124073777/85a901d4-ab7b-432e-a7a4-21a6a3adeb2e)
-![AdminFirst](https://github.com/piko29/MotoCenter/assets/124073777/f6b8aee0-b798-4ea0-91c5-89f9f997c1a0)
+# How to start
+Standard procedure of Maven commands.<br><br>
+* Applcation available at localhost:8080<br>
+* H2 console available at localhost:8080/h2-console (Login "sa" without password.)<br><br>
+<b>Embedded users and passwords:</b><br> 
+* login: superadmin&#xfeff;@email.com password: admin<br>
+* login: jack@email&#xfeff;.com password: dogcat<br>
+* login: andrew@email&#xfeff;.com password: super<br>
 
-### Second stage completed: MotoProduct added, MotoProduct panel added, owned products panel added, details of MotoProduct added.
+# Screenshots
 
-![moto-products](https://github.com/piko29/MotoCenter/assets/124073777/b9766d77-257d-48bf-821f-426e99ed0507)   ![user-panel-owned-products](https://github.com/piko29/MotoCenter/assets/124073777/281ada7f-5ae2-4cfa-a912-e759fd0c8dbc)
-![moto-product-details](https://github.com/piko29/MotoCenter/assets/124073777/557c8c7f-d7c4-479f-8db4-39eb483d806f)  ![index](https://github.com/piko29/MotoCenter/assets/124073777/f7e82236-913f-4832-a7af-464d03c07b1b)
-![administrator-panel](https://github.com/piko29/MotoCenter/assets/124073777/30e656d6-24bc-4f6b-aa9d-cdf8d9521722)    ![user-panel](https://github.com/piko29/MotoCenter/assets/124073777/d9da8b49-dd98-402e-a221-0cfd520d84f5) 
- 
-### Third stage completed: From user-panel - adding MotoProduct, editing MotoProduct, deleting MotoProduct.
-
-![edit-motoproduct-1-3-commit](https://github.com/piko29/MotoCenter/assets/124073777/4c5d4aaf-ecde-4357-92aa-3c17a9d0fca4)![deleting-motoproduct-3-commit](https://github.com/piko29/MotoCenter/assets/124073777/7ac8fa82-8b50-4f8d-97cf-de518e0ddac1)
-![addig-motoproduct-3-commit](https://github.com/piko29/MotoCenter/assets/124073777/4277c2a4-3cf3-4a27-ab72-414264b7ce1f)![edit-motoproduct-2-3-commit](https://github.com/piko29/MotoCenter/assets/124073777/e505b50a-4aca-46b9-8d53-4c3758dcdb4d)
