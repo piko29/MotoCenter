@@ -3,7 +3,6 @@ package com.piko29.MotoCenter_v03.model.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-//04.01
 @Getter
 @Setter
 public class MessageDto {

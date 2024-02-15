@@ -1,12 +1,6 @@
-/*.container {*/
-/*    margin: auto;*/
-/*    !*text-align: center;*!*/
-/*    align-items: center;*/
-/*}*/
 .products-container {
     text-align: center;
     align-items: center;
-    /*max-width: 1500px;*/
     display: flex;
 }
 
@@ -100,12 +94,9 @@
     background-image:url(../images/theme-2.jpg);
     background-color: black;
 
-
-
     /* Full height */
     height: 100%;
     margin: 0;
-    /*width: 100%;*/
 
     /* Center and scale the image nicely */
     background-position: center;
@@ -119,8 +110,6 @@
     font-weight: bold;
     font-style: oblique;
     color: black;
-    /*margin-top: 20px;*/
-    /*margin-bottom: 20px;*/
     margin: 20px auto 20px 0;
 
 
@@ -132,8 +121,6 @@
     font-weight: bold;
     font-style: oblique;
     color: black;
-    /*float: right;*/
-    /*text-align: right;*/
     margin: 20px 0 20px auto;
 
 

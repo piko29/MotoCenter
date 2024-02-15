@@ -23,19 +23,11 @@
     <h1 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">Administrator panel</h1>
 </div>
 <div class="text-bg-black text-center justify-content-center">
-<!--    <header class="p-3 text-bg-black d-flex justify-content-center py-3">-->
         <form th:action="@{/admin/users-list}" th:method="get">
             <button class="btn btn-outline-danger small-margin w-50 py-3 btn-lg"
                     sec:authorize="isAuthenticated()" type="submit">Users management</button>
         </form>
 </div>
-<!--    <h2>Users list</h2>-->
-<!--    <ul>-->
-<!--        <li class="element-frame" th:each="email: ${userEmails}">-->
-<!--            <span th:text="${email}">example@email.com</span>-->
-<!--            <a href="#" th:href="@{/admin/delete-user(email=${email})}">Delete</a>-->
-<!--        </li>-->
-<!--    </ul>-->
 
 </body>
 </html>

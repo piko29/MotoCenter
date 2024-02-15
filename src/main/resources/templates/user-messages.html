@@ -22,23 +22,6 @@
 
 <div class="d-flex flex-column justify-content-center w-50 mx-auto" >
 <br>
-<!--    <h2 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">Conversations and received messages:</h2>-->
-<!--    <h2 th:if="${(sender == #authentication.name)||(owner != #authentication.name)}" class="text-center" style="font-weight: bolder;font-style: oblique;color: orange">You have no conversations and received messages.</h2>-->
-<!--    <ul class="container">tu wyżej ogarnij w warstwie serwisu, gdzie jesteś wysyłającym albo odbiorcą(do jednego użytkownika)-->
-<!--        <li th:unless="${sender == #authentication.name}" class="row element-frame rounded-2 bg-dark-subtle" style="font-weight: bold; list-style: none;-->
-<!--        font-style: oblique;color: red" th:each="sender: ${sender}" >-->
-<!--            <span th:text="${'You have messages from: ' + sender}" class="text-start">sender email</span>-->
-<!--            <br>-->
-<!--            <form th:action="@{'user-messages/{email}'(email=${sender})}" class="text-center" th:method="get">-->
-<!--                <button class="btn btn-outline-primary w-75 py-3 small-margin border-3" style="font-weight: bold" type="submit">Chat with User</button>-->
-<!--            </form>-->
-<!--            <form th:action="@{'user-messages/{email}/delete'(email=${sender})}" class="text-center" th:method="get">-->
-<!--                <button class="btn btn-outline-danger w-75 py-3 small-margin border-3" style="font-weight: bold" type="submit">Delete Chat</button>-->
-<!--            </form>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--<br>-->
-
     <h2 th:unless="${interactionEmail.isEmpty()}" class="text-center" style="font-weight: bolder;font-style: oblique;
      color: red">Your have messages from/to: </h2>
     <h2 th:if="${interactionEmail.isEmpty()}" class="text-center" style="font-weight: bolder;font-style: oblique;
@@ -58,24 +41,6 @@
             </form>
         </li>
     </ul>
-
-<!--    <h2 th:if="${owner != #authentication.name}" class="text-center" style="font-weight: bolder;font-style: oblique;-->
-<!--    color: red">Your sent messages:</h2>-->
-<!--    <h2 th:unless="${owner != #authentication.name}" class="text-center" style="font-weight: bolder;font-style: oblique;-->
-<!--    color: orange">Your have no sent messages.</h2>-->
-<!--    <ul class="container">-->
-<!--        <li th:if="${owner != #authentication.name}" class="row element-frame rounded-2 bg-dark-subtle" style="font-weight: bold; list-style: none;-->
-<!--        font-style: oblique;color: red" th:each="owner: ${owner}">-->
-<!--            <span th:text="${'Your messages to: ' +owner}" class="text-start">recipient email</span>-->
-<!--            <br>-->
-<!--            <form th:action="@{'user-messages/{email}'(email=${owner})}" class="text-center" th:method="get">-->
-<!--                <button class="btn btn-outline-primary w-75 py-3 small-margin border-3" style="font-weight: bold" type="submit">Check messages</button>-->
-<!--            </form>-->
-<!--            <form th:action="@{'user-messages/{email}/delete'(email=${owner})}" class="text-center" th:method="get">-->
-<!--                <button class="btn btn-outline-danger w-75 py-3 small-margin border-3" style="font-weight: bold" type="submit">Delete Chat</button>-->
-<!--            </form>-->
-<!--        </li>-->
-<!--    </ul>-->
 </div>
 </body>
 </html>

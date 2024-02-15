@@ -199,19 +199,16 @@ public class UserService {
         //12.02 kolejna wiadomosc na ten sam temat ode mnie
         if(sourceMessage.getSender().getEmail().equals(getNameFromContextHolder())){
         message.setUser(sourceMessage.getUser());
-            System.out.println("1:"+ sourceMessage.getUser());
             message.setSender(sender);
             message.setProductId(sourceMessage.getProductId());
             message.setTitle(sourceMessage.getTitle());
 //            message.setUser(sourceMessage.getSender());//odbiorca
             message.setContent(dto.getContent());
         } else {
-            //12.02
             message.setSender(sender);
             message.setProductId(sourceMessage.getProductId());
             message.setTitle(sourceMessage.getTitle());
             message.setUser(sourceMessage.getSender());//odbiorca
-            System.out.println("2:????"+ sourceMessage.getSender());
             message.setContent(dto.getContent());
 
         }
@@ -268,8 +265,6 @@ public class UserService {
         return interactionWithUser;
 
     }
-    //12.02
-
     //zmiana 11.02 do odczytywania rowniez wyslanych wiadomosci
 
     public List<MessageDto> chatWithUser(String email){
@@ -305,22 +300,10 @@ public class UserService {
                 .sorted(Comparator.comparing(MessageDto::getMessageId))
                 .toList();
 
-//        List<MessageDto> received = messageRepository.findMessagesByUser
-//                        (userRepository.findByEmail(email).orElseThrow())
-//                .stream()
-//                .map(messageDtoMapper::map)
-//                .filter(messageDto -> messageDto.getRecipient().equals(getNameFromContextHolder()))
-//                .toList();
-
         return sent;
 
     }
-    //
-    //09.02
 
-
-
-    //06.02 working fine
     @Transactional
     public void deleteChatWithUser(String email){
         List<Message> received = messageRepository.findMessagesBySender
@@ -350,9 +333,7 @@ public class UserService {
                 .filter(motoProduct -> motoProduct.getBuyer().equals(getNameFromContextHolder()))
                 .toList();
 
-
     }
-
 
 }
 

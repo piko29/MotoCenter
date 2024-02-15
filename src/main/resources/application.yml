@@ -4,4 +4,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-#      none było 21.12 i był błąd sekwencji moto product
+

@@ -25,16 +25,6 @@
     <i class="fa-regular fa-envelope fa-4x" style="color: red"></i>
 </div>
 
-<!--<div th:text="${'Title: ' + messageDto.getTitle()}">Title: </div>-->
-<!--<div th:text="${'Recipient: ' + messageDto.getSender().getEmail()}">Recipient: </div>-->
-<!--<br>-->
-
-<!--<form class="form-item" th:action="@{'/user-panel/user-messages/{email}/{id}/answer'(email=${messageDto.getSender().getEmail()},-->
-<!--            id=${messageDto.getMessageId()})}" method="post" th:object="${message}">-->
-<!--    <textarea class="message-box" rows="6" th:field="*{content}" placeholder="Text of message"></textarea>-->
-<!--    <button type="submit" class="big-button">Send message</button>-->
-<!--</form>-->
-
 <br>
 <div class="mx-auto rounded-4 text-center justify-content-center bg-dark-subtle w-75">
 <!--<div class="card-body border rounded-4 text-center d-flex flex-column justify-content-center bg-dark-subtle w-75">-->
@@ -50,10 +40,8 @@
         <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Recipient: ' + messageDto.getSender().getEmail()}">Recipient: </span>
         <br>
         <textarea class="message-box" rows=6 th:field="*{content}" placeholder="Text of message"></textarea>
-<!--        <div class="form-floating custom-form-floating">-->
         <button class="btn btn-outline-danger w-75 py-3 custom-form-floating border-3"
                 style="margin-bottom: 10px;font-weight: bold" type="submit">Send message</button>
-<!--        </div>-->
     </form>
 
     <form th:if="${messageDto.getSender().getEmail()==#authentication.name}" class="form-floating custom-form-floating "
@@ -68,13 +56,10 @@
         <span style="font-weight: bold; color: red; align-content: flex-start" th:text="${'Recipient: ' + messageDto.getUser().getEmail()}">Recipient: </span>
         <br>
         <textarea class="message-box" rows=6 th:field="*{content}" placeholder="Text of message"></textarea>
-        <!--        <div class="form-floating custom-form-floating">-->
         <button class="btn btn-outline-danger w-75 py-3 custom-form-floating border-3"
                 style="margin-bottom: 10px;font-weight: bold" type="submit">Send message</button>
-        <!--        </div>-->
     </form>
 </div>
-
 
 </body>
 </html>

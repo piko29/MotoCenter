@@ -26,25 +26,6 @@
     <h1 th:if="${allOwnedMotoProducts.isEmpty()}" class="text-center" style="font-weight: bolder;font-style: oblique; color: orange">You have no Products.</h1>
 </div>
 
-<!--        <ul>-->
-<!--            <li class="element-frame" th:each="allOwnedMotoProducts: ${allOwnedMotoProducts}">-->
-<!--                <img th:src="@{${'/images/'+allOwnedMotoProducts.getImage()}}" width="300">-->
-<!--                <br>-->
-<!--                <span th:text="${'Title: ' + allOwnedMotoProducts.getTitle()}">example_title</span>-->
-<!--                <br>-->
-<!--                <span th:text="${'Price:' + allOwnedMotoProducts.getPrice() +' PLN'}">example_price</span>-->
-<!--                <br>-->
-<!--                <span th:text="${'Contact info: ' + allOwnedMotoProducts.getContactInfo()}">example_contact</span>-->
-<!--                <br>-->
-<!--                <form th:action="@{'user-products/{id}'(id=${allOwnedMotoProducts.getId()})}" th:method="get">-->
-<!--                    <button class="small-button" type="submit">Details and edition</button>-->
-<!--                </form>-->
-<!--&lt;!&ndash;button to delete motoproduct directly from list&ndash;&gt;-->
-<!--&lt;!&ndash;                <form th:action="@{'user-products/delete/{id}'(id=${allOwnedMotoProducts.getId()})}" th:method=get>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <button class="small-button" type="submit">Delete</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                </form>&ndash;&gt;-->
-<!--            </li>-->
-<!--        </ul>-->
 <ul class="container justify-content-center" style="list-style: none">
     <li class="card border-2 rounded-4 custom-form-floating bg-dark-subtle align-items-center"
         th:each="allOwnedMotoProducts: ${allOwnedMotoProducts}">

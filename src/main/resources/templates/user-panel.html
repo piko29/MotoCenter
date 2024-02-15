@@ -19,22 +19,11 @@
                 th:text="|Log out ${#authentication.name}|" type="submit">Log out</button>
     </form>
 </header>
-<!--<div class="item-left">-->
-<!--    <a href="#" th:href="@{/}">Go back to homepage</a>-->
-<!--</div>-->
-<!--<div class="item-right">-->
-<!--    <a sec:authorize="isAuthenticated()"-->
-<!--       th:text="|Log out ${#authentication.name}|"-->
-<!--       href="#" th:href="@{/logout}">Log out</a>-->
-<!--</div>-->
+
 <br>
 <h1 class="text-center" style="font-weight: bolder;font-style: oblique;color: red"
     th:text="'Hello ' + ${#authentication.name}">Hello!</h1>
-<!--<h2>Change password</h2>-->
-<!--<form th:action="@{/change-password}" method="post">-->
-<!--    <input type="password" name="newPassword" placeholder="New password">-->
-<!--    <button type="submit">Change</button>-->
-<!--</form>-->
+
 <div class="text-bg-black text-center justify-content-center">
     <br>
     <form th:action="@{user-panel/change-password}" th:method="get">
@@ -55,12 +44,7 @@
     <form th:action="@{user-panel/bought-products}" th:method="get">
         <button class="btn btn-outline-light btn-lg btn-block small-margin w-50" type="submit">Bought products</button>
     </form>
-<!--    <h2>Users list</h2>-->
-<!--    <ul>-->
-<!--        <li class="element-frame" th:each="email: ${userEmails}">-->
-<!--            <span th:text="${email}">example@email.com</span>-->
-<!--        </li>-->
-<!--    </ul>-->
+
 </div>
 </body>
 </html>

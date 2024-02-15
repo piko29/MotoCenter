@@ -11,12 +11,6 @@
 </head>
 <body class="bg">
 
-<!--<header class="p-3 text-bg-dark d-flex justify-content-center py-2">-->
-<!--    <form th:action="@{/}" th:method="get" class="item-left">-->
-<!--        <button class="btn btn-outline-light me-3" type="submit">Back to Main Page</button>-->
-<!--    </form>-->
-<!--</header>-->
-
 <div class="container text-center d-flex flex-column justify-content-center min-vh-100">
 <!--    <img src="../static/images/MotoCenter.png" th:src="@{/images/MotoCenter.png}" alt="logo"-->
 <!--         class="full-image">-->
@@ -27,22 +21,18 @@
             <input type="email" th:field="*{email}" class="form-control"  id="floatingEmail2" placeholder="Email" >
             <label for="floatingEmail2">Email</label>
         </div>
-<!--        <input th:field="*{email}" placeholder="email address" type="email" class="form-item">-->
         <div class="form-floating custom-form-floating">
             <input type="password" th:field="*{password}" class="form-control"  id="floatingPassword2" placeholder="Password" >
             <label for="floatingPassword2">Password</label>
         </div>
-<!--        <input th:field="*{password}" placeholder="password" type="password" class="form-item">-->
         <div class="form-floating custom-form-floating">
             <input type="text" th:field="*{firstName}" class="form-control"  id="floatingName2" placeholder="FirstName" >
             <label for="floatingName2">First Name</label>
         </div>
-<!--        <input th:field="*{firstName}" placeholder="name" class="form-item">-->
         <div class="form-floating custom-form-floating">
             <input type="text" th:field="*{lastName}" class="form-control"  id="floatingName3" placeholder="LastName" >
             <label for="floatingName3">Last Name</label>
         </div>
-<!--        <input th:field="*{lastName}" placeholder="last name" class="form-item">-->
         <button type="submit" class="btn btn-secondary w-100 py-3 custom-form-floating"
         style="font-weight: bolder">Register</button>
     </form>

@@ -29,15 +29,11 @@ import java.util.Set;
 @RequestMapping("/user-panel")
 public class UserController {
     private final UserService userService;
-    private final MessageDtoMapper messageDto;
-    //24.01 uploading pictures
+
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/images";
 
     @GetMapping
     String userPanel() {
-//        List<String> allUserEmails = userService.findAllUserEmails();
-//        model.addAttribute("userEmails", allUserEmails);
-//        System.out.println(userService.getNameFromContextHolder());
         return "user-panel";
     }
     @GetMapping("/change-password")
@@ -82,8 +78,6 @@ public class UserController {
         fileNames.append(file.getOriginalFilename());
         Files.write(fileNameAndPath, file.getBytes());
 
-//        model.addAttribute("msg", fileNames);
-
         userService.saveMotoProduct(motoProductDto,file.getOriginalFilename());
         System.out.println("adding picture done - controller");
         return "redirect:/user-panel";
@@ -113,22 +107,9 @@ public class UserController {
 
     @GetMapping("/user-messages")
     String userPanelMessages(Model model) {
-        Set<String> allSenders = userService.getMessageSenders();
-        model.addAttribute("sender", allSenders);
-        //07.02
-        Set<String> ownerMessages = userService.getMessageRecipients();
-        model.addAttribute("owner", ownerMessages);
-        //
-        //to tez chyba niepotrzebne userEmails
-        List<String> allUserEmails = userService.findAllUserEmails();
-        model.addAttribute("userEmails", allUserEmails);
-        //09.02
-
-        //12.02
         Set<String> interactionEmails = userService.getMessageRecipientsAndSenders();
         System.out.println(userService.getMessageRecipientsAndSenders());
         model.addAttribute("interactionEmail", interactionEmails);
-
 
         return "user-messages";
     }
@@ -136,25 +117,16 @@ public class UserController {
     String chatWithUser(Model model, @PathVariable String email){
         List<MessageDto> messagesFromOneUser = userService.chatWithUser(email);
         model.addAttribute("messagesFromOneUser", messagesFromOneUser);
-        //07.02
-        List<MessageDto> singleMessages = userService.chatWithUser(email);
-        model.addAttribute("singleMessages", singleMessages);
-        //
+
         return "chat-with-user";
     }
-    //06.02
+
     @GetMapping("/user-messages/{email}/delete")
     String deleteChat(@PathVariable String email){
         userService.deleteChatWithUser(email);
         return "redirect:/user-panel/user-messages";
     }
-//maybe later for direct chat without specific topic
-//    @GetMapping("user-messages/{email}/send")
-//    String writeMessage(@PathVariable String email){
-//        return "answer-message-form";
-//    }
 
-    //05.01
     @GetMapping("/user-messages/{email}/{id}/delete")
     String deleteMessage(@PathVariable Long id,@PathVariable String email,Model model){
         List<MessageDto> messagesFromOneUser = userService.chatWithUser(email);
@@ -162,7 +134,7 @@ public class UserController {
         userService.deleteMessage(id);
         return "redirect:/user-panel/user-messages/{email}";
     }
-    //08.01
+
     @GetMapping("/user-messages/{email}/{id}/answer")
     String motoProductMessageForm(@PathVariable Long id,@PathVariable String email, Model model, Message message){
 

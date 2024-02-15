@@ -33,7 +33,6 @@ public class MotoProductController {
         model.addAttribute("motoDetails", allDetails);
         return "moto-product-details";
     }
-    //added 30.12 to write a message to the owner
     @GetMapping("/{id}/message")
     String motoProductMessageForm(@PathVariable Long id, Message messageDto, Model model){
         MotoProduct motoProduct = motoProductService.findMotoProduct(id);
@@ -51,7 +50,6 @@ public class MotoProductController {
 
     @GetMapping("/{id}/buy")
     String buyMotoProductForm(@PathVariable Long id,Message messageDto, Model model){
-//        motoProductService.buyMotoProduct(id);
         MotoProduct motoProduct = motoProductService.findMotoProduct(id);
         model.addAttribute("motoProduct", motoProduct);
         model.addAttribute("messageDto", messageDto);

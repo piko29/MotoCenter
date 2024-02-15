@@ -12,8 +12,6 @@ import java.util.Optional;
 public interface MessageRepository extends JpaRepository<Message, Long> {
     Optional<Message> findMessageBySender(User sender);
     List<Message> findMessagesBySender(User sender);
-
-    //07.02 znajdz po odbiorcy
     List<Message> findMessagesByUser(User user);
 
 }

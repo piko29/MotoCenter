@@ -23,41 +23,29 @@
 <div class="text-center d-flex flex-column justify-content-center w-50 mx-auto" >
     <h1 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">Add product</h1>
 
-
     <form class="custom-form-floating" th:action="@{/user-panel/add}" method="post" th:object="${motoProduct}"
           enctype="multipart/form-data">
         <label for="pictureLabel" class="item-left"
                style="font-weight: bolder;font-style: oblique;color: red">Add picture</label>
         <input  type="file" name="img" accept="image/*" id="pictureLabel" required
                 class="btn btn-secondary w-100 form-floating">
-<!--        <input th:field="*{title}" placeholder="title" class="form-item">-->
         <div class="form-floating custom-form-floating">
             <input th:field="*{title}" class="form-control" id="floatingTitle1" placeholder="title" >
             <label for="floatingTitle1">Title</label>
         </div>
-<!--        <input th:field="*{description}" placeholder="description" class="form-item">-->
-<!--        <div class="form-floating custom-form-floating">-->
             <label for="floatingDescription1" class="item-left"
                    style="font-weight: bolder;font-style: oblique;color: red">Add description</label>
             <textarea th:field="*{description}" class="form-control no-resize" rows="3"
                       id="floatingDescription1" placeholder="Write description here"></textarea>
-<!--        </div>-->
-<!--        <div class="form-floating custom-form-floating">-->
-<!--            <input type="text" th:field="*{description}" class="form-control"  id="floatingDescription2" placeholder="description" >-->
-<!--            <label for="floatingDescription2">Description</label>-->
-<!--        </div>-->
-<!--        <input th:field="*{contactInfo}" placeholder="contact info" class="form-item">-->
         <div class="form-floating custom-form-floating">
             <input type="text" th:field="*{contactInfo}" class="form-control" id="floatingContact1" placeholder="contact" >
             <label for="floatingContact1">Contact info</label>
         </div>
-<!--        <input th:field="*{price}" placeholder="price" class="form-item">-->
         <div class="form-floating custom-form-floating">
             <input type="number" th:field="*{price}" class="form-control" id="floatingPrice1" placeholder="price PLN">
             <label for="floatingPrice1">Price PLN</label></div>
         <button type="submit" class="btn btn-outline-danger w-100 py-3 custom-form-floating">Add MotoProduct</button>
     </form>
-
 </div>
 </body>
 </html>

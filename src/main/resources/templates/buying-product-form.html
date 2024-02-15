@@ -25,18 +25,6 @@
     <i class="fa-regular fa-envelope fa-4x text-center" style="color: red"></i>
 </div>
 <br>
-<!--<div th:text="${'Title: ' + motoProduct.title}">Title: </div>-->
-<!--<div th:text="${'Owner: ' + motoProduct.user.getEmail()}">Owner: </div>-->
-<!--<br>-->
-
-
-<!--<form class="form-item" th:action="@{'/products/{id}/buy'(id=${motoProduct.id})}" method="post" th:object="${messageDto}">-->
-<!--    &lt;!&ndash;    <input class="message-box" rows="6" th:field="${messageDto.getContent()}" placeholder="Text of message"></input>&ndash;&gt;-->
-<!--    <textarea class="message-box" rows="6" th:field="*{content}" placeholder="Write details about delivery and payment"></textarea>-->
-<!--    <button type="submit" class="big-button">Send message</button>-->
-<!--</form>-->
-<!--th:action="@{'/products/{id}/message'(id=${motoProduct.id})}"-->
-
 
 <div class="mx-auto rounded-4 text-center justify-content-center bg-dark-subtle w-75">
     <form class="form-floating custom-form-floating" th:action="@{'/products/{id}/buy'(id=${motoProduct.id})}"
@@ -49,15 +37,10 @@
         <br>
         <textarea class="message-box" rows="6" th:field="*{content}" placeholder="Write details about delivery and payment"></textarea>
         <br>
-<!--        <div class="form-floating custom-form-floating">-->
-<!--            <br>-->
             <button class="btn btn-outline-danger w-75 py-3 custom-form-floating border-3" style="margin-bottom: 10px;font-weight: bold"
                     type="submit">Send message</button>
-<!--        </div>-->
     </form>
 </div>
-
-
 
 </body>
 </html>

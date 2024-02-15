@@ -21,35 +21,19 @@
 </header>
 
 <div class="container text-center d-flex flex-column justify-content-center w-50">
-<!--    <img src="../static/images/MotoCenter.png" th:src="@{/images/MotoCenter.png}" alt="logo"-->
-<!--         class="resized-image">-->
     <h1 class="text-center" style="font-weight: bolder;font-style: oblique;color: red">Edit MotoProduct</h1>
-<!--    old function-->
-<!--    <form class="form" th:action="@{'/user-panel/user-products/{id}/edit'(id=${motoProduct.id})}" method="post" th:object="${motoProduct}">-->
-<!--        <input th:field="*{title}" placeholder="new title" class="form-item">-->
-<!--        <input th:field="*{description}" placeholder="new description" class="form-item">-->
-<!--        <input th:field="*{contactInfo}" placeholder="new contact info" class="form-item">-->
-<!--        <input th:field="*{price}" placeholder="new price" class="form-item">-->
-<!--        <button type="submit" class="form-item">Confirm changes</button>-->
-<!--    </form>-->
+
     <form class="custom-form-floating" th:action="@{'/user-panel/user-products/{id}/edit'(id=${motoProduct.id})}"
           method="post" th:object="${motoProduct}" enctype="multipart/form-data">
 
         <label for="pictureLabel" class="item-left"
                style="font-weight: bolder;font-style: oblique;color: red">Change picture</label>
-<!--        <input  type="file" name="img" accept="image/*" id="pictureLabel"-->
-<!--                class="btn btn-secondary w-100 form-floating">-->
-
         <input type="file" name="img" accept="image/*" id="pictureLabel"
                 class="btn btn-secondary w-100 form-floating" required>
-        <!--        <input th:field="*{title}" placeholder="title" class="form-item">-->
-
         <div class="form-floating custom-form-floating">
             <input th:field="*{title}" class="form-control" id="floatingTitle1" placeholder="title" >
             <label for="floatingTitle1">New title</label>
         </div>
-        <!--        <input th:field="*{description}" placeholder="description" class="form-item">-->
-        <!--        <div class="form-floating custom-form-floating">-->
         <label for="floatingDescription1" class="item-left"
                style="font-weight: bolder;font-style: oblique;color: red">New description</label>
         <textarea th:field="*{description}" class="form-control no-resize" rows="3"
