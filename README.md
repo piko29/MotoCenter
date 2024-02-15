@@ -49,4 +49,17 @@ Standard procedure of Maven commands.<br><br>
 * login: andrew@email&#xfeff;.com password: super<br>
 
 # Screenshots
+![Login](https://github.com/piko29/MotoCenter/assets/124073777/54ab8b8f-2e69-4743-852d-edc4083cf9d7)![Registration](https://github.com/piko29/MotoCenter/assets/124073777/bf25c66f-ed70-45c6-8d3c-80b78028efe4)![MainMenu](https://github.com/piko29/MotoCenter/assets/124073777/e95ae98b-32ae-48ea-b4ab-3eda8ef26ae5)![UserPanel](https://github.com/piko29/MotoCenter/assets/124073777/0d46f0be-19ff-485f-93c6-70e8cf20ee3b)![ProductsPanel](https://github.com/piko29/MotoCenter/assets/124073777/48201eb4-f8be-4ee5-978d-5bf485833d76)![ProductDetails](https://github.com/piko29/MotoCenter/assets/124073777/65a04096-53a0-4dae-91cc-a5ff8b8765d0)![CheckingMessages](https://github.com/piko29/MotoCenter/assets/124073777/5275ea2e-6b4c-41ea-a2c8-4004793251d6)![Chat](https://github.com/piko29/MotoCenter/assets/124073777/d007c298-ca1f-4548-8075-912bd0aa1fdf)![SendingMessage](https://github.com/piko29/MotoCenter/assets/124073777/f656d81e-90bb-49a7-9a62-2165ac61045f)![AddProduct](https://github.com/piko29/MotoCenter/assets/124073777/53db00e6-6707-4b13-8743-162b36979283)![OwnedProducts](https://github.com/piko29/MotoCenter/assets/124073777/dbb19606-5acc-4be6-8a94-1ee6bb6b3627)![UsersManagement](https://github.com/piko29/MotoCenter/assets/124073777/1b17eff4-a50e-4230-8fb7-a3a94e9470a5)
+
+
+
+
+
+
+
+
+
+
+
+
 
